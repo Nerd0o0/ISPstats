@@ -95,13 +95,13 @@
             var sprints=JSON.parse(this.response);
             var a=0;
             sprints.forEach(function(item,i,arr){
-                $('#selectSprint').append('<option id=\''+item.id+'\' num='+a+'>'+item.name+'</option>');
+                $('#selectSprint').append('<option id=\''+item.sprintID+'\' num='+a+'>'+item.name+'</option>');
                 a++;
             });
         }
         var select=document.getElementById('selectProject');
         var arg = select.options.item(select.options.selectedIndex).getAttribute('id');
-        httpRequest.open('GET', 'http://127.0.0.1:8080/getSprints?index='+arg, b);
+        httpRequest.open('GET', 'http://127.0.0.1:8080/getSprintsForProject/'+arg, b);
         httpRequest.send(null);
     }
     function getProjects(){
@@ -117,7 +117,7 @@
             var sprints=JSON.parse(this.response);
             var a=0;
             sprints.forEach(function(item,i,arr){
-                $('#selectProject').append('<option id=\''+item.id+'\' num='+a+'>'+item.name+'</option>');
+                $('#selectProject').append('<option id=\''+item.projectID+'\' num='+a+'>'+item.name+'</option>');
                 a++;
             });
         }
@@ -144,7 +144,7 @@
                 var workTime=days>0?
                     days+'d '+ (hour<10?('0'+hour):hour) + ':' + (min<10?('0'+min):min):
                     (hour<10?('0'+hour):hour) + ':' + (min<10?('0'+min):min);
-                $('#myTable tbody').append('<tr><td><a href=\'persons.jsp?index='+item.personID+'\'>'+item.person+'</a></td>' +
+                $('#myTable tbody').append('<tr><td><a href=\'persons.html/'+item.personID+'\'>'+item.person+'</a></td>' +
                     '<td data-sort-value=\''+item.workTime+'\' align=\'right\'>'+ workTime +'</td>' +
                     '<td data-sort-value=\''+item.completeCount+'\'>'+item.completeCount+'</td>' +
                     '<td data-sort-value=\''+item.completeEstTime+'\' align=\'right\'>'+getDateString(item.completeEstTime)+'</td>' +
@@ -181,7 +181,7 @@
         }
         var select=document.getElementById('selectSprint');
         var arg = select.options.item(select.options.selectedIndex).getAttribute('id');
-        httpRequest.open('GET', 'http://localhost:8080/getJobsForSprint?index='+arg, true);
+        httpRequest.open('GET', 'http://localhost:8080/getJobsForSprint/'+arg, true);
         httpRequest.send(null);
     };
     //это код для перехода из других таблиц по жмакабельным названиям спринта
