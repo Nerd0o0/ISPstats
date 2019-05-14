@@ -1,0 +1,13 @@
+[requires]
+Poco/1.9.0@pocoproject/stable
+jsonformoderncpp/3.3.0@vthiery/stable
+boost/1.70.0@conan/stable
+
+[build_requires]
+catch2/2.3.0@bincrafters/stable
+
+[generators]
+cmake
+
+[options]
+Poco:shared=False

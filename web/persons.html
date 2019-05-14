@@ -1,0 +1,200 @@
+<html>
+<head>
+    <title>Статистика по людям во всех проектах и спринтах</title>
+    <link href="footable-bootstrap.latest/css/footable.bootstrap.min.css" rel="stylesheet">
+    <script src="jquery.min.js"></script>
+    <script src="footable-bootstrap.latest/js/footable.min.js"></script>
+    <style>
+        .footable-sortable{
+            cursor: pointer;
+        }
+        .footable-sortable:hover .fooicon-sort{
+            opacity: 1;
+        }
+        .fooicon-sort{
+            opacity: 0;
+        }
+        .fooicon-sort:after{
+            content: "\21c5";
+        }
+        .fooicon-sort-asc:after{
+            content: "\21ca";
+        }
+        .fooicon-sort-desc:after{
+            content: "\21c8";
+        }
+    </style>
+</head>
+<body>
+<a href="sprints.html">Статистика по спринтам</a><br/>
+<a href="projects.html">Статистика по командам/проектам</a><br/>
+<select id="selectPerson">
+    <option id='27' num='0'>a.adushkin</option>
+    <option id='12' num='1'>a.bryukhanov</option>
+    <option id='1' num='2'>a.chernousov</option>
+    <option id='37' num='3'>a.dimova</option>
+    <option id='50' num='4'>a.ilatovskiy</option>
+    <option id='59' num='5'>a.leontieva</option>
+    <option id='57' num='6'>a.maksimov</option>
+    <option id='18' num='7'>a.meschenko</option>
+    <option id='26' num='8'>a.mitroshin</option>
+    <option id='15' num='9'>a.trifonov</option>
+    <option id='49' num='10'>a.tumakov</option>
+    <option id='5' num='11'>a.zderiglazova</option>
+    <option id='42' num='12'>a.zikrackiy</option>
+    <option id='24' num='13'>a.zvoznikov</option>
+    <option id='47' num='14'>d.kostromin</option>
+    <option id='16' num='15'>d.kuzmin</option>
+    <option id='53' num='16'>d.lebedev</option>
+    <option id='28' num='17'>d.pikunova</option>
+    <option id='21' num='18'>d.smirnov</option>
+    <option id='36' num='19'>d.sumbaev</option>
+    <option id='11' num='20'>d.syrovatskiy</option>
+    <option id='55' num='21'>dvlad</option>
+    <option id='34' num='22'>e.kamyshova</option>
+    <option id='45' num='23'>e.polyakov</option>
+    <option id='39' num='24'>e.yamschikova</option>
+    <option id='7' num='25'>g.govorin</option>
+    <option id='52' num='26'>ghost</option>
+    <option id='4' num='27'>greed</option>
+    <option id='35' num='28'>i.karpukova</option>
+    <option id='30' num='29'>i.meshkov</option>
+    <option id='22' num='30'>i.zhukova</option>
+    <option id='33' num='31'>jenkins</option>
+    <option id='44' num='32'>k.basharkevich</option>
+    <option id='43' num='33'>k.lopatina</option>
+    <option id='31' num='34'>k.sevostjanova</option>
+    <option id='3' num='35'>l.mashechko</option>
+    <option id='29' num='36'>l.panteleeva</option>
+    <option id='58' num='37'>m.demyanov</option>
+    <option id='17' num='38'>m.lapardin</option>
+    <option id='20' num='39'>m.semerikov</option>
+    <option id='56' num='40'>m.voropai</option>
+    <option id='54' num='41'>n.bezyazykova</option>
+    <option id='14' num='42'>n.mamaev</option>
+    <option id='41' num='43'>n.shvets</option>
+    <option id='19' num='44'>n.trifonova</option>
+    <option id='8' num='45'>p.andreev</option>
+    <option id='48' num='46'>p.belonosov</option>
+    <option id='32' num='47'>p.yurin</option>
+    <option id='38' num='48'>r.cherepanov</option>
+    <option id='25' num='49'>s.arlyapov</option>
+    <option id='6' num='50'>s.butakov</option>
+    <option id='9' num='51'>s.moiseenko</option>
+    <option id='2' num='52'>sikroz</option>
+    <option id='13' num='53'>tuupic</option>
+    <option id='23' num='54'>v.burov</option>
+    <option id='51' num='55'>v.ilinykh</option>
+    <option id='40' num='56'>v.lezhnin</option>
+    <option id='46' num='57'>v.tolmacheva</option>
+    <option id='10' num='58'>z.laletina</option>
+
+</select>
+<button id="button" class="button" onclick="sendRequest()">Поиск</button>
+<table class="table table-striped" id="myTable" data-paging="true" cellspacing="0" border="1" data-sorting="true">
+
+    <thead><tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td colspan="4">Завершено</td>
+        <td colspan="3">Не завершено</td>
+        <td colspan="4">Помощь</td>
+        <td colspan="6">Код</td>
+    </tr>
+    <tr>
+        <td>Проект</td>
+        <td>Спринт</td>
+        <td data-type="date">Время работы</td>
+        <td>Задач</td>
+        <td data-type="date">План</td>
+        <td>Факт</td>
+        <td>Оценка</td>
+        <td>Задач</td>
+        <td>План</td>
+        <td>Факт</td>
+        <td>Закончено -время</td>
+        <td>Закончено</td>
+        <td>В работе -время</td>
+        <td>В работе</td>
+        <td>Возвраты</td>
+        <td>Замечания</td>
+        <td>Ветки</td>
+        <td>Слияния</td>
+        <td>Просмотры</td>
+        <td>Комментарии</td>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<script>
+    function sendRequest() {
+        var httpRequest;
+        if (window.XMLHttpRequest) { //Mozilla, Safari
+            httpRequest = new XMLHttpRequest();
+        } else if (Window.ActiveXObject) { //IE
+            httpRequest = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        httpRequest.overrideMimeType('text/ajax');
+        httpRequest.onload = function () {
+            $('#myTable tbody tr').remove();
+            var data = JSON.parse(this.response);
+            data.forEach(function (item, i, arr) {
+                var ratio = (item.completeFactTime / item.completeEstTime).toFixed(2);
+                if (isNaN(ratio) || ratio == Infinity) ratio = 0;
+                var days=Math.floor(item.workTime/28800);
+                var hour=Math.floor((item.workTime % 28800) / 3600);
+                var min=Math.floor(((item.workTime % 28800) % 3600) / 60);
+                var workTime=days>0?
+                    days+'d '+ (hour<10?('0'+hour):hour) + ':' + (min<10?('0'+min):min):
+                    (hour<10?('0'+hour):hour) + ':' + (min<10?('0'+min):min);
+                $('#myTable tbody').append('<tr><td>' + item.project + '</td>' +
+                    '<td><a href=sprint.jsp?index='+item.sprintID+'>' + item.sprint + '</a></td>' +
+                    '<td data-sort-value=\'' + item.workTime + '\' align=\'right\'>' + workTime + '</td>' +
+                    '<td data-sort-value=\''+item.completeCount+'\'>' + item.completeCount + '</td>' +
+                    '<td data-sort-value=\'' + item.completeEstTime + '\' align=\'right\'>' + getDateString(item.completeEstTime) + '</td>' +
+                    '<td data-sort-value=\'' + item.completeFactTime + '\' align=\'right\'>' + getDateString(item.completeFactTime) + '</td>' +
+                    '<td data-sort-value=\''+ratio+'\'>' + ratio + '</td>' +
+                    '<td data-sort-value=\''+item.incompleteCount+'\'>' + item.incompleteCount + '</td>' +
+                    '<td data-sort-value=\'' + item.incompleteEstTime + '\' align=\'right\'>' + getDateString(item.incompleteEstTime) + '</td>' +
+                    '<td data-sort-value=\'' + item.incompleteFactTime + '\' align=\'right\'>' + getDateString(item.incompleteFactTime) + '</td>' +
+                    '<td data-sort-value=\'' + item.completeHelpTime + '\' align=\'right\'>' + getDateString(item.completeHelpTime) + '</td>' +
+                    '<td data-sort-value=\''+item.completeHelpCount+'\'>' + item.completeHelpCount + '</td>' +
+                    '<td data-sort-value=\'' + item.incompleteHelpTime + '\' align=\'right\'>' + item.incompleteHelpTime + '</td>' +
+                    '<td data-sort-value=\''+item.incompleteHelpCount+'\'>' + item.incompleteHelpCount + '</td>' +
+                    '<td data-sort-value=\''+item.codeReturns+'\'>' + item.codeReturns + '</td>' +
+                    '<td data-sort-value=\''+item.codeDiscussion+'\'>' + item.codeDiscussion + '</td>' +
+                    '<td data-sort-value=\''+item.codeBranches+'\'>' + item.codeBranches + '</td>' +
+                    '<td data-sort-value=\''+item.codeMerged+'\'>' + item.codeMerged + '</td>' +
+                    '<td data-sort-value=\''+item.codeSeen+'\'>' + item.codeSeen + '</td>' +
+                    '<td data-sort-value=\''+item.codeCommented+'\'>' + item.codeCommented + '</td></tr>');
+            });
+
+            function getDateString(sec) {
+                var days = Math.floor(sec / 480);
+                var hour=Math.floor((sec % 480) / 60);
+                var min=Math.floor((sec % 480) % 60);
+                return days>0?
+                    days+'d '+ (hour<10?('0'+hour):hour) + ':' + (min<10?('0'+min):min):
+                    (hour<10?('0'+hour):hour) + ':' + (min<10?('0'+min):min);
+            }
+
+            $('#myTable').footable();
+            FooTable.get('#myTable').pageSize(15);
+        }
+        var select = document.getElementById('selectPerson');
+        var arg = select.options.item(select.options.selectedIndex).getAttribute('id');
+        httpRequest.open('GET', 'http://127.0.0.1:8888/getStatsForPerson?index=' + arg, true);
+        httpRequest.send(null);
+    };
+    var id=window.location.search.substring(7);
+    if(id){
+        var select = document.getElementById('selectPerson');
+        //найти элемент с нужным индексом (они были отсортированы, id в базе и индекс в списке не совпадают)
+        var index=document.getElementById(id).getAttribute("num");
+        select.selectedIndex=Number(index);
+        sendRequest();
+    }
+</script>
+</body></html>

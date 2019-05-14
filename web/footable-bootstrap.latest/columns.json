@@ -1,0 +1,15 @@
+[
+	{"name":"person", "title":"Имя"},
+	{"name":"helpTime", "title":"Помощь"},
+	{"name":"completeCount", "title":"CompleteCount"},
+	{"name":"completeEstTime", "title":"CompleteEstTime"},
+	{"name":"completeFactTime", "title":"CompleteFactTime"},
+	{"name":"ratio", "title":"Ratio"},
+	{"name":"incompleteCount", "title":"IncompleteCount"},
+	{"name":"incompleteEstTime", "title":"IncompleteEstTime"},
+	{"name":"incompleteFactTime", "title":"IncompleteFactTime"},
+	{"name":"codeReverse", "title":"CodeReturns"},
+	{"name":"discussion", "title":"Discussion"},
+	{"name":"helpSee", "title":"HelpSee"},
+	{"name":"helpDiscussion", "title":"HelpDiscussion"}
+]
