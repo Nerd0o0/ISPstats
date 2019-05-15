@@ -98,16 +98,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/handlers.cpp">
-			<Option target="ISPstats"/>
-		</Unit>
-		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/handlers.h">
-			<Option target="ISPstats"/>
-		</Unit>
 		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/include/Error.h">
 			<Option target="ISPstats"/>
 		</Unit>
 		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/include/Factory.h">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/include/handlers.h">
 			<Option target="ISPstats"/>
 		</Unit>
 		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/scr/Error.cpp">
@@ -116,10 +113,10 @@
 		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/scr/Factory.cpp">
 			<Option target="ISPstats"/>
 		</Unit>
-		<Unit filename="/home/nerd/CLionProjects/ISPstats/include/DBConnector.h">
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/scr/handlers.cpp">
 			<Option target="ISPstats"/>
 		</Unit>
-		<Unit filename="/home/nerd/CLionProjects/ISPstats/include/Gets.h">
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/include/DBConnector.h">
 			<Option target="ISPstats"/>
 		</Unit>
 		<Unit filename="/home/nerd/CLionProjects/ISPstats/include/Server.h">
@@ -129,9 +126,6 @@
 			<Option target="ISPstats"/>
 		</Unit>
 		<Unit filename="/home/nerd/CLionProjects/ISPstats/src/DBConnector.cpp">
-			<Option target="ISPstats"/>
-		</Unit>
-		<Unit filename="/home/nerd/CLionProjects/ISPstats/src/Gets.cpp">
 			<Option target="ISPstats"/>
 		</Unit>
 		<Unit filename="/home/nerd/CLionProjects/ISPstats/src/Server.cpp">

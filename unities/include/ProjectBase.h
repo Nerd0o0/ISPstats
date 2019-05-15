@@ -8,8 +8,8 @@ namespace unities {
     public:
         int projectID;
         std::string name;
-        ProjectBase(int project_id, std::string n) : projectID(project_id), name(n){}
-        ProjectBase(char **rows):ProjectBase(stoi(rows[0]),rows[1]){}
+        ProjectBase(int project_id, std::string n);
+        ProjectBase(char **rows);
         ProjectBase(){}
     };
     inline void to_json(nlohmann::json &j, const ProjectBase &p) {

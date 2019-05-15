@@ -1,6 +1,6 @@
 #include <iostream>
 #include "include/Server.h"
-#include "src/DBConnector.cpp"
+#include "include/DBConnector.h"
 #include <string.h>
 #include <stdlib.h>
 #include <exception>

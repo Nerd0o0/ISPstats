@@ -4,12 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/nerd/CLionProjects/ISPstats/handlers/handlers.cpp" "/home/nerd/CLionProjects/ISPstats/cmake-build-debug/CMakeFiles/ISPstats.dir/handlers/handlers.cpp.o"
   "/home/nerd/CLionProjects/ISPstats/handlers/scr/Error.cpp" "/home/nerd/CLionProjects/ISPstats/cmake-build-debug/CMakeFiles/ISPstats.dir/handlers/scr/Error.cpp.o"
   "/home/nerd/CLionProjects/ISPstats/handlers/scr/Factory.cpp" "/home/nerd/CLionProjects/ISPstats/cmake-build-debug/CMakeFiles/ISPstats.dir/handlers/scr/Factory.cpp.o"
+  "/home/nerd/CLionProjects/ISPstats/handlers/scr/handlers.cpp" "/home/nerd/CLionProjects/ISPstats/cmake-build-debug/CMakeFiles/ISPstats.dir/handlers/scr/handlers.cpp.o"
   "/home/nerd/CLionProjects/ISPstats/main.cpp" "/home/nerd/CLionProjects/ISPstats/cmake-build-debug/CMakeFiles/ISPstats.dir/main.cpp.o"
   "/home/nerd/CLionProjects/ISPstats/src/DBConnector.cpp" "/home/nerd/CLionProjects/ISPstats/cmake-build-debug/CMakeFiles/ISPstats.dir/src/DBConnector.cpp.o"
-  "/home/nerd/CLionProjects/ISPstats/src/Gets.cpp" "/home/nerd/CLionProjects/ISPstats/cmake-build-debug/CMakeFiles/ISPstats.dir/src/Gets.cpp.o"
   "/home/nerd/CLionProjects/ISPstats/src/Server.cpp" "/home/nerd/CLionProjects/ISPstats/cmake-build-debug/CMakeFiles/ISPstats.dir/src/Server.cpp.o"
   "/home/nerd/CLionProjects/ISPstats/unities/src/JobsForPerson.cpp" "/home/nerd/CLionProjects/ISPstats/cmake-build-debug/CMakeFiles/ISPstats.dir/unities/src/JobsForPerson.cpp.o"
   "/home/nerd/CLionProjects/ISPstats/unities/src/JobsForSprint.cpp" "/home/nerd/CLionProjects/ISPstats/cmake-build-debug/CMakeFiles/ISPstats.dir/unities/src/JobsForSprint.cpp.o"

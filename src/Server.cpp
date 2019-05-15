@@ -13,11 +13,8 @@
 #include <Poco/URI.h>
 #include <Poco/StringTokenizer.h>
 
-Poco::Mutex Server::textLock;
-
 int Server::main(const std::vector<std::string> &)
 {
-
     auto *parameters=new Poco::Net::HTTPServerParams();
     parameters->setTimeout(10000);
     parameters->setMaxQueued(100);
