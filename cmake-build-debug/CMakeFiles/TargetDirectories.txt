@@ -1,0 +1,3 @@
+/home/nerd/CLionProjects/ISPstats/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/nerd/CLionProjects/ISPstats/cmake-build-debug/CMakeFiles/ISPstats.dir
+/home/nerd/CLionProjects/ISPstats/cmake-build-debug/CMakeFiles/edit_cache.dir

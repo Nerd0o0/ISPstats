@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="ISPstats"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="clang"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake-build-debug\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/nerd/CLionProjects/ISPstats/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/nerd/CLionProjects/ISPstats/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ISPstats">
+				<Option output="/home/nerd/CLionProjects/ISPstats/cmake-build-debug/bin/ISPstats" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nerd/CLionProjects/ISPstats/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/nerd/.conan/data/catch2/2.3.0/bincrafters/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"/>
+					<Add directory="/home/nerd/.conan/data/Poco/1.9.0/pocoproject/stable/package/91646f5746fd4f8ed2324ad0eb9b1c9133c77aba/include"/>
+					<Add directory="/home/nerd/.conan/data/jsonformoderncpp/3.3.0/vthiery/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"/>
+					<Add directory="/home/nerd/.conan/data/boost/1.70.0/conan/stable/package/44e23eda135a5723f9814bb42d643349a83857f0/include"/>
+					<Add directory="/home/nerd/.conan/data/OpenSSL/1.0.2o/conan/stable/package/eab8ea3f0238036f28e1cfe43144bf6891179517/include"/>
+					<Add directory="/home/nerd/.conan/data/bzip2/1.0.6/conan/stable/package/8d4085a3b1671229efd986ee057fef1b6286ce5d/include"/>
+					<Add directory="/home/nerd/.conan/data/zlib/1.2.11/conan/stable/package/d18c7969d006e56f2a0d590b65bc788eb0d0b075/include"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/x86_64-linux-gnu/c++/7.4.0"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0/backward"/>
+					<Add directory="/usr/include/clang/6.0.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/llvm-6.0/lib/clang/6.0.0/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 ISPstats"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ISPstats/fast">
+				<Option output="/home/nerd/CLionProjects/ISPstats/cmake-build-debug/bin/ISPstats" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/nerd/CLionProjects/ISPstats/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/nerd/.conan/data/catch2/2.3.0/bincrafters/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"/>
+					<Add directory="/home/nerd/.conan/data/Poco/1.9.0/pocoproject/stable/package/91646f5746fd4f8ed2324ad0eb9b1c9133c77aba/include"/>
+					<Add directory="/home/nerd/.conan/data/jsonformoderncpp/3.3.0/vthiery/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"/>
+					<Add directory="/home/nerd/.conan/data/boost/1.70.0/conan/stable/package/44e23eda135a5723f9814bb42d643349a83857f0/include"/>
+					<Add directory="/home/nerd/.conan/data/OpenSSL/1.0.2o/conan/stable/package/eab8ea3f0238036f28e1cfe43144bf6891179517/include"/>
+					<Add directory="/home/nerd/.conan/data/bzip2/1.0.6/conan/stable/package/8d4085a3b1671229efd986ee057fef1b6286ce5d/include"/>
+					<Add directory="/home/nerd/.conan/data/zlib/1.2.11/conan/stable/package/d18c7969d006e56f2a0d590b65bc788eb0d0b075/include"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/x86_64-linux-gnu/c++/7.4.0"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0/backward"/>
+					<Add directory="/usr/include/clang/6.0.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/llvm-6.0/lib/clang/6.0.0/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 ISPstats/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/nerd/CLionProjects/ISPstats/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/nerd/CLionProjects/ISPstats/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/handlers.cpp">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/handlers.h">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/include/Error.h">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/include/Factory.h">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/scr/Error.cpp">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/handlers/scr/Factory.cpp">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/include/DBConnector.h">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/include/Gets.h">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/include/Server.h">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/main.cpp">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/src/DBConnector.cpp">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/src/Gets.cpp">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/src/Server.cpp">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/unities/include/JobsForPerson.h">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/unities/include/JobsForSprint.h">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/unities/include/PersonBase.h">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/unities/include/ProjectBase.h">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/unities/include/SprintBase.h">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/unities/include/SprintsAndProjects.h">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/unities/src/JobsForPerson.cpp">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/unities/src/JobsForSprint.cpp">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/unities/src/PersonBase.cpp">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/unities/src/ProjectBase.cpp">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/unities/src/SprintBase.cpp">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/unities/src/SprintsAndProjects.cpp">
+			<Option target="ISPstats"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/nerd/CLionProjects/ISPstats/cmake-build-debug/conanbuildinfo.cmake">
+			<Option virtualFolder="CMake Files\cmake-build-debug\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,10 @@
+/snap/clion/70/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/nerd/CLionProjects/ISPstats
+-- Conan: Adjusting output directories
+-- Conan: Using cmake global configuration
+-- Conan: Adjusting default RPATHs Conan policies
+-- Conan: Adjusting language standard
+-- Current conanbuildinfo.cmake directory: /home/nerd/CLionProjects/ISPstats/cmake-build-debug
+-- Conan: Checking correct version: 6.0
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/nerd/CLionProjects/ISPstats/cmake-build-debug
