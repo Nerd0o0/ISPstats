@@ -8,10 +8,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/ISPstats.dir/unities/src/ProjectBase.cpp.o"
   "CMakeFiles/ISPstats.dir/unities/src/SprintsAndProjects.cpp.o"
   "CMakeFiles/ISPstats.dir/unities/src/JobsForPerson.cpp.o"
-  "CMakeFiles/ISPstats.dir/src/Gets.cpp.o"
   "CMakeFiles/ISPstats.dir/unities/src/SprintBase.cpp.o"
   "CMakeFiles/ISPstats.dir/unities/src/JobsForSprint.cpp.o"
-  "CMakeFiles/ISPstats.dir/handlers/handlers.cpp.o"
+  "CMakeFiles/ISPstats.dir/handlers/scr/handlers.cpp.o"
   "bin/ISPstats.pdb"
   "bin/ISPstats"
 )

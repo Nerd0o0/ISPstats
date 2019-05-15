@@ -8,9 +8,8 @@ namespace unities {
     public:
         int personID;
         std::string name;
-        PersonBase(int person_id, std::string n) : personID(person_id), name(n){}
-        PersonBase(char **rows):PersonBase(stoi(rows[0]),rows[1]){}
-        PersonBase(){}
+        PersonBase(int person_id, std::string n);
+        PersonBase(char **rows);
     };
     inline void to_json(nlohmann::json &j, const PersonBase &p) {
         j = nlohmann::json{

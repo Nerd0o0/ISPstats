@@ -10,9 +10,8 @@ namespace unities {
         int sprintID;
         std::string name;
 
-        SprintBase(int sprint_id, std::string n):sprintID(sprint_id), name(n){}
-        SprintBase(char **rows):SprintBase(stoi(rows[0]),rows[1]){}
-        SprintBase(){}
+        SprintBase(int sprint_id, std::string n);
+        SprintBase(char **rows);
 
     };
 
