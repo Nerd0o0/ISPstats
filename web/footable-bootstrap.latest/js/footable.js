@@ -6599,10 +6599,10 @@
 		createCell: function(row){
 			var $buttons = this.editing.$rowButtons(), $cell = $('<td/>').append($buttons);
 			if (F.is.jq(row.$el)){
-				if (this.projects === 0){
+				if (this.index === 0){
 					$cell.prependTo(row.$el);
 				} else {
-					$cell.insertAfter(row.$el.children().eq(this.projects-1));
+					$cell.insertAfter(row.$el.children().eq(this.index-1));
 				}
 			}
 			return new F.Cell(this.ft, row, this, $cell || $cell.html());

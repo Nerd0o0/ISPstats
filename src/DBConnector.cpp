@@ -1,7 +1,4 @@
-//
-// Created by nerd on 02.05.19.
-//
-
+#pragma once
 #include "../include/mysql.h"
 #include <stdlib.h>
 #include <iostream>

@@ -1,4 +1,5 @@
 #include "handlers.h"
+#include "../src/DBConnector.cpp"
 
 void getProjects::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) {
     response.add("Access-Control-Allow-Origin","*");
@@ -36,14 +37,24 @@ void getPersons::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::
     }
     response.send() << result;
 }
-void getSprintsForProject::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) {}
-void getSprintsAndProjects::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) {}
+void getSprintsForProject::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) {
+    response.add("Access-Control-Allow-Origin","*");
+    response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
+    nlohmann::json result = nlohmann::json::array();
+    DBConnector connector;
+    auto sprints=connector.getSprintsForProject(getSprintsForProject::project_id);
+    for(auto sprint:sprints){
+        result.push_back(sprint);
+    }
+    response.send() << result;
+}
+void getSprintsAndProjects::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response){}
 void getJobsForSprint::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) {
     response.add("Access-Control-Allow-Origin","*");
     response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
     nlohmann::json result = nlohmann::json::array();
     DBConnector connector;
-    auto persons=connector.getJobsForSprints(getJobsForSprint::sprint_id);
+    auto persons=connector.getJobsForSprint(getJobsForSprint::sprint_id);
     std::cout<<"getJobsForSprint "<<getJobsForSprint::sprint_id<<std::endl;
     for(auto person:persons){
         result.push_back(person);

@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <nlohmann/json.hpp>
@@ -41,7 +42,7 @@ namespace unities {
         JobsForSprint(char **rows):JobsForSprint(stoi(rows[0]),rows[1],stoi(rows[2]),stoi(rows[3]),stoi(rows[4]),
                 stoi(rows[5]),stoi(rows[6]), stoi(rows[7]),stoi(rows[8]),
                 stoi(rows[9]),stoi(rows[10]), stoi(rows[11]),stoi(rows[12]),
-                stoi(rows[13]),stoi(rows[14]), stoi(rows[15]),stoi(rows[16]),stoi(rows[17]),stoi(rows[18])){}
+                stoi(rows[13]),stoi(rows[14]), stoi(rows[15]),stoi(rows[16]),stoi(rows[17]),(rows[18]==NULL)?0:stoi(rows[18])){}
         JobsForSprint(){}
 
     };

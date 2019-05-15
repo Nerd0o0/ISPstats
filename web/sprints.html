@@ -29,24 +29,10 @@
 <body>
 <a href="persons.html">Статистика по сотрудникам</a><br/>
 <a href="projects.html">Статистика по командам/проектам</a><br/>
-<select id="selectProject" onready="getProjects(true)" onchange="getSprints(true)">
-
-
-
-</select>
-<select id="selectSprint">
-    <option id='88' num='0'>Спринт 8. Шаблоны</option>
-    <option id='87' num='1'>Спринт 7 доделка SSL</option>
-    <option id='86' num='2'>Спринт 6. SSL и т.д.</option>
-    <option id='85' num='3'>Спринт 5</option>
-    <option id='84' num='4'>Спринт 4. Расширенные настройки сайта.</option>
-    <option id='83' num='5'>Спринт 3. Настройки и создание сайта</option>
-    <option id='82' num='6'>Спринт 2</option>
-
-</select>
+<select id="selectProject" onchange="getSprints()"></select>
+<select id="selectSprint"></select>
 <button class="button" onclick="sendRequest()">Поиск</button>
 <table class="table table-striped" id="myTable" data-paging="true" cellspacing="0" border="1" data-sorting="true">
-
     <thead><tr>
         <td></td>
         <td></td>
@@ -55,7 +41,7 @@
         <td colspan="4">Помощь</td>
         <td colspan="6">Код</td>
     </tr>
-    <tr>
+    <tr class="footable-header">
         <td>Имя</td>
         <td data-type="date">Время работы</td>
         <td>Задач</td>
@@ -82,13 +68,15 @@
     </tbody>
 </table>
 <script>
-    function getSprints(b){
+    function getSprints(){
+
         var httpRequest;
         if(window.XMLHttpRequest){ //Mozilla, Safari
             httpRequest=new XMLHttpRequest();
         } else if(Window.ActiveXObject){ //IE
             httpRequest=new ActiveXObject('Microsoft.XMLHTTP');
         }
+
         httpRequest.overrideMimeType('text/ajax');
         httpRequest.onload=function() {
             $('#selectSprint option').remove();
@@ -98,10 +86,11 @@
                 $('#selectSprint').append('<option id=\''+item.sprintID+'\' num='+a+'>'+item.name+'</option>');
                 a++;
             });
-        }
+        };
+
         var select=document.getElementById('selectProject');
         var arg = select.options.item(select.options.selectedIndex).getAttribute('id');
-        httpRequest.open('GET', 'http://127.0.0.1:8080/getSprintsForProject/'+arg, b);
+        httpRequest.open('GET', 'http://127.0.0.1:8080/getSprintsForProject/'+arg, true);
         httpRequest.send(null);
     }
     function getProjects(){
@@ -121,7 +110,7 @@
                 a++;
             });
         }
-        httpRequest.open('GET', 'http://localhost:8080/getProjects', true);
+        httpRequest.open('GET', 'http://localhost:8080/getProjects', false);
         httpRequest.send(null);
     }
     function sendRequest(){
@@ -216,5 +205,6 @@
 
     }
 </script>
-<script>getProjects()</script>
+<script>getProjects();
+    getSprints()</script>
 </body></html>

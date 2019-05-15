@@ -1,6 +1,4 @@
-//
-// Created by nerd on 07.05.19.
-//
+#pragma once
 #include <nlohmann/json.hpp>
 #include <string>
 
