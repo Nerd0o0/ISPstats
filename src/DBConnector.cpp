@@ -43,21 +43,25 @@ vector<unities::SprintsAndProjects> DBConnector::getSprintsAndProjects() {
 
 vector<unities::JobsForSprint> DBConnector::getJobsForSprint(int sprintID) {
     //s=std::strcat(*s," );
-    std::string s = std::string(std::string("SELECT Person.PersonID, Person.Name, CompleteCount, CompleteEstTime,"
+    std::string s = "SELECT Person.PersonID, Person.Name, CompleteCount, CompleteEstTime,"
                                             "CompleteFactTime, IncompleteCount,\
                     IncompleteEstTime, IncompleteFactTime, CompleteHelpTime, CompleteHelpCount, IncompleteHelpTime,\
                     IncompleteHelpCount, Job.CodeReturns, Job.CodeDiscussion, Job.CodeBranches, Job.CodeMerged,\
                     Job.CodeSeen, Job.CodeCommented, sum(JobTime) FROM Job,\
-                    Person LEFT JOIN JobTime ON Person.PersonID=JobTime.PersonID AND DATE(JobDate) BETWEEN '2017-06-26'\
-                    AND '2017-07-08' WHERE Job.SprintID=") + std::to_string(sprintID) +
-                                (" AND Job.PersonID=Person.PersonID GROUP BY Person.PersonID;"));
-    std::cout << s << std::endl;
+                    Person LEFT JOIN JobTime ON Person.PersonID=JobTime.PersonID AND DATE(JobDate)\
+                    BETWEEN (SELECT SprintBegin from Sprint where SprintID=";
+    s+=std::to_string(sprintID);
+    s+=") AND (SELECT SprintEnd from Sprint where SprintID=";
+    s+=std::to_string(sprintID);
+    s+=") WHERE Job.SprintID=";
+    s+=std::to_string(sprintID);
+    s+=" AND Job.PersonID=Person.PersonID GROUP BY Person.PersonID;";
+    std::cout<<s<<std::endl;
     mysql_query(connector, s.c_str());
     vector<unities::JobsForSprint> vector;
     if (res = mysql_store_result(connector)) {
         //vector.resize(mysql_num_rows(res));
         while (row = mysql_fetch_row(res)) {
-            std::cout << (row[18] == NULL) << std::endl;
             vector.push_back(unities::JobsForSprint(row));
         }
         mysql_free_result(res);

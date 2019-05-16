@@ -8,20 +8,25 @@
 namespace handlers {
     HTTPRequestHandler *Factory::GetMethodHandlers(const std::string &uri) const {
         if (uri == "/" || uri == "/getProjects") {
+            std::cout<<"geProjects"<<std::endl;
             return new getProjects();
         } else if (uri == "/getSprints") {
+            std::cout<<"getSprints"<<std::endl;
             return new getSprints();
         } else if (uri == "/getPersons") {
+            std::cout<<"getPerson"<<std::endl;
             return new getPersons();
         } else if (std::smatch m; std::regex_match(uri, m, std::regex{R"(/getSprintsForProject/(\d+))"})) {
-            std::cout<<"getSprintsForProjects"<<std::endl;
+            std::cout<<"getSprintsForProjects"<<m[1]<<std::endl;
             return new getSprintsForProject(std::stoi(m[1]));
-
         } else if (uri == "/getSprintsAndProjects") {
+            std::cout<<"getSprintsAndProjects"<<std::endl;
             return new getSprintsAndProjects;
         } else if (std::smatch m; std::regex_match(uri, m, std::regex{R"(/getJobsForSprint/(\d+))"})) {
+            std::cout<<"getJobsForSprint"<<m[1]<<std::endl;
             return new getJobsForSprint(std::stoi(m[1]));
         } else if (std::smatch m; std::regex_match(uri, m, std::regex{R"(/getJobsForPerson/(\d+))"})) {
+            std::cout<<"getJobsForPerson"<<std::endl;
             return new getJobsForPerson(std::stoi(m[1]));
         }
         return nullptr;
