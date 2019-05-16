@@ -27,9 +27,11 @@ DBConnector::~DBConnector() {
 }
 
 vector<unities::SprintsAndProjects> DBConnector::getSprintsAndProjects() {
-    mysql_query(connector, "select SprintID Project.Name, Sprint.Name, BugCount, EstimationBugTime, CompleteBugCount,"
-                           "CompleteBugEstimation, CompleteBugFact, IncompleteBugCount, IncompleteBugEstimation, IncompleteBugFact,"
-                           "CodeReturns, CodeDiscussion from Sprint, Project where Sprint.ProjectID=Project.ProjectID;");
+    std::string query="SELECT SprintID Project.Name, Sprint.Name, BugCount, EstimationBugTime,\
+                      CompleteBugCount, CompleteBugEstimation, CompleteBugFact, IncompleteBugCount,\
+                      IncompleteBugEstimation, IncompleteBugFact, CodeReturns, CodeDiscussion\
+                      FROM Sprint, Project WHERE Sprint.ProjectID=Project.ProjectID;";
+    mysql_query(connector, query.c_str());
     vector<unities::SprintsAndProjects> vector;
     if (res = mysql_store_result(connector)) {
         //vector.resize(mysql_num_rows(res));
@@ -43,21 +45,17 @@ vector<unities::SprintsAndProjects> DBConnector::getSprintsAndProjects() {
 
 vector<unities::JobsForSprint> DBConnector::getJobsForSprint(int sprintID) {
     //s=std::strcat(*s," );
-    std::string s = "SELECT Person.PersonID, Person.Name, CompleteCount, CompleteEstTime,"
-                                            "CompleteFactTime, IncompleteCount,\
-                    IncompleteEstTime, IncompleteFactTime, CompleteHelpTime, CompleteHelpCount, IncompleteHelpTime,\
-                    IncompleteHelpCount, Job.CodeReturns, Job.CodeDiscussion, Job.CodeBranches, Job.CodeMerged,\
+    std::string query = "SELECT Person.PersonID, Person.Name, CompleteCount, CompleteEstTime,"
+                    "CompleteFactTime, IncompleteCount, IncompleteEstTime, IncompleteFactTime,\
+                    CompleteHelpTime, CompleteHelpCount, IncompleteHelpTime, IncompleteHelpCount,\
+                    Job.CodeReturns, Job.CodeDiscussion, Job.CodeBranches, Job.CodeMerged,\
                     Job.CodeSeen, Job.CodeCommented, sum(JobTime) FROM Job,\
                     Person LEFT JOIN JobTime ON Person.PersonID=JobTime.PersonID AND DATE(JobDate)\
-                    BETWEEN (SELECT SprintBegin from Sprint where SprintID=";
-    s+=std::to_string(sprintID);
-    s+=") AND (SELECT SprintEnd from Sprint where SprintID=";
-    s+=std::to_string(sprintID);
-    s+=") WHERE Job.SprintID=";
-    s+=std::to_string(sprintID);
-    s+=" AND Job.PersonID=Person.PersonID GROUP BY Person.PersonID;";
-    std::cout<<s<<std::endl;
-    mysql_query(connector, s.c_str());
+                    BETWEEN (SELECT SprintBegin from Sprint where SprintID="+std::to_string(sprintID)+
+                    ") AND (SELECT SprintEnd from Sprint where SprintID="+std::to_string(sprintID)+
+                    ") WHERE Job.SprintID="+std::to_string(sprintID)+
+                    " AND Job.PersonID=Person.PersonID GROUP BY Person.PersonID;";
+    mysql_query(connector, query.c_str());
     vector<unities::JobsForSprint> vector;
     if (res = mysql_store_result(connector)) {
         //vector.resize(mysql_num_rows(res));
@@ -73,8 +71,10 @@ vector<unities::JobsForSprint> DBConnector::getJobsForSprint(int sprintID) {
 vector<unities::JobsForPerson> getJobsForPerson() {}
 
 vector<unities::SprintBase> DBConnector::getSprints() {
-    mysql_query(connector, "SELECT DISTINCT  Sprint.SprintID, Name FROM Sprint,Job where Sprint.SprintID=Job.SprintID \
-                                ORDER BY Sprint.SprintBegin DESC;");
+    std::string query="SELECT DISTINCT Sprint.SprintID, Name FROM Sprint,Job \
+                    WHERE Sprint.SprintID=Job.SprintID \
+                    ORDER BY Sprint.SprintBegin DESC;";
+    mysql_query(connector, query.c_str());
     vector<unities::SprintBase> vector;
     if (res = mysql_store_result(connector)) {
         //vector.resize(mysql_num_rows(res));
@@ -87,8 +87,10 @@ vector<unities::SprintBase> DBConnector::getSprints() {
 }
 
 vector<unities::ProjectBase> DBConnector::getProjects() {
-    mysql_query(connector, "select DISTINCT Project.ProjectID, Project.Name from Project,Sprint,Job where \
-                               Project.ProjectID=Sprint.ProjectID AND Sprint.SprintID=Job.SprintID order by Sprint.SprintBegin DESC;");
+    std::string query="SELECT DISTINCT Project.ProjectID, Project.Name FROM Project,Sprint,Job WHERE "
+                      "Project.ProjectID=Sprint.ProjectID AND Sprint.SprintID=Job.SprintID \
+                      ORDER BY Sprint.SprintBegin DESC;";
+    mysql_query(connector, query.c_str());
     vector<unities::ProjectBase> vector;
     if (res = mysql_store_result(connector)) {
         //vector.resize(mysql_num_rows(res));
@@ -101,7 +103,8 @@ vector<unities::ProjectBase> DBConnector::getProjects() {
 }
 
 vector<unities::PersonBase> DBConnector::getPersons() {
-    mysql_query(connector, "SELECT PersonID, Name FROM Person ORDER BY Person.Name;");
+    std::string query="SELECT PersonID, Name FROM Person ORDER BY Person.Name;";
+    mysql_query(connector, query.c_str());
     vector<unities::PersonBase> vector;
     if (res = mysql_store_result(connector)) {
         //vector.resize(mysql_num_rows(res));
@@ -114,9 +117,10 @@ vector<unities::PersonBase> DBConnector::getPersons() {
 }
 
 vector<unities::SprintBase> DBConnector::getSprintsForProject(int id) {
-    mysql_query(connector, std::string(std::string("SELECT DISTINCT  Sprint.SprintID, Name FROM Sprint,Job where \
-                                           Sprint.SprintID=Job.SprintID AND Sprint.ProjectID=") + std::to_string(id) +
-                                       (" ORDER BY Sprint.SprintBegin DESC;")).c_str());
+    std::string query="SELECT DISTINCT  Sprint.SprintID, Name FROM Sprint,Job WHERE "
+                      "Sprint.SprintID=Job.SprintID AND Sprint.ProjectID=" + std::to_string(id) +
+                      " ORDER BY Sprint.SprintBegin DESC;";
+    mysql_query(connector, query.c_str());
     vector<unities::SprintBase> vector;
     if (res = mysql_store_result(connector)) {
         //vector.resize(mysql_num_rows(res));
