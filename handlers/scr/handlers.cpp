@@ -55,7 +55,6 @@ void getJobsForSprint::HandleRestRequest(Poco::Net::HTTPServerRequest& request, 
     nlohmann::json result = nlohmann::json::array();
     DBConnector connector;
     auto persons=connector.getJobsForSprint(getJobsForSprint::sprint_id);
-    std::cout<<"getJobsForSprint "<<getJobsForSprint::sprint_id<<std::endl;
     for(auto person:persons){
         result.push_back(person);
     }
