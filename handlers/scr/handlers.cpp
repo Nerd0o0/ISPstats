@@ -37,6 +37,18 @@ void getPersons::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::
     }
     response.send() << result;
 }
+void getProjectForSprint::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) {
+    response.add("Access-Control-Allow-Origin","*");
+    response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
+    nlohmann::json result = nlohmann::json::array();
+    DBConnector connector;
+    std::cout<<"getProjectForSprint"<<std::endl;
+    auto persons=connector.getProjectForSprint(sprint_id);
+    for(auto person:persons){
+        result.push_back(person);
+    }
+    response.send() << result;
+}
 void getSprintsForProject::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) {
     response.add("Access-Control-Allow-Origin","*");
     response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);

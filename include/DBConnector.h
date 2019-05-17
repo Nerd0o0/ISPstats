@@ -18,6 +18,7 @@ public:
     vector<unities::JobsForPerson> getJobsForPerson();
     vector<unities::SprintBase> getSprints();
     vector<unities::ProjectBase> getProjects();
+    vector<unities::ProjectBase> getProjectForSprint(int sprint_id);
     vector<unities::PersonBase> getPersons();
     vector<unities::SprintBase> getSprintsForProject(int id);
 
