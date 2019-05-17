@@ -30,6 +30,11 @@ class getSprints:public RestHandler{
 class getPersons:public RestHandler{
     void HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) override;
 };
+class getProjectForSprint:public RestHandler{
+    int sprint_id;
+    void HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) override;
+public: getProjectForSprint(int id):sprint_id(id){}
+};
 class getSprintsForProject:public RestHandler{
     int project_id;
     void HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) override;
