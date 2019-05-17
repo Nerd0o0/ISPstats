@@ -27,10 +27,12 @@ DBConnector::~DBConnector() {
 }
 
 vector<unities::SprintsAndProjects> DBConnector::getSprintsAndProjects() {
-    std::string query="SELECT SprintID Project.Name, Sprint.Name, BugCount, EstimationBugTime,\
-                      CompleteBugCount, CompleteBugEstimation, CompleteBugFact, IncompleteBugCount,\
-                      IncompleteBugEstimation, IncompleteBugFact, CodeReturns, CodeDiscussion\
-                      FROM Sprint, Project WHERE Sprint.ProjectID=Project.ProjectID;";
+    std::string query="SELECT SprintID, Project.Name, Sprint.Name, Sprint.SprintBegin, Sprint.SprintEnd, BugCount,\
+                      EstimationBugTime, CompleteBugCount, CompleteBugEstimation, CompleteBugFact, \
+                      IncompleteBugCount, IncompleteBugEstimation, IncompleteBugFact, CodeBranches, \
+                      CodeDiscussion, CodeReturns \
+                      FROM Sprint, Project WHERE Sprint.ProjectID=Project.ProjectID \
+                      ORDER BY Sprint.SprintBegin desc;";
     mysql_query(connector, query.c_str());
     vector<unities::SprintsAndProjects> vector;
     if (res = mysql_store_result(connector)) {

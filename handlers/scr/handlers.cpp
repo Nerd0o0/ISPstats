@@ -60,7 +60,17 @@ void getSprintsForProject::HandleRestRequest(Poco::Net::HTTPServerRequest& reque
     }
     response.send() << result;
 }
-void getSprintsAndProjects::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response){}
+void getSprintsAndProjects::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response){
+    response.add("Access-Control-Allow-Origin","*");
+    response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
+    nlohmann::json result = nlohmann::json::array();
+    DBConnector connector;
+    auto sprints=connector.getSprintsAndProjects();
+    for(auto sprint:sprints){
+        result.push_back(sprint);
+    }
+    response.send()<<result;
+}
 void getJobsForSprint::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) {
     response.add("Access-Control-Allow-Origin","*");
     response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
