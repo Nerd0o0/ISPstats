@@ -19,5 +19,6 @@ namespace unities {
                 codeReturns(code_returns) {}
         SprintsAndProjects::SprintsAndProjects(char **rows):SprintsAndProjects(stoi(rows[0]),rows[1],rows[2],rows[3],rows[4],stoi(rows[5]),
                                                            stoi(rows[6]),stoi(rows[7]),stoi(rows[8]),stoi(rows[9]),
-                                                           stoi(rows[10]),stoi(rows[11]),stoi(rows[12]),stoi(rows[13]),stoi(rows[14]),stoi(rows[15])){}
+                                                           stoi(rows[10]),stoi(rows[11]),stoi(rows[12]),stoi(rows[13]),
+                                                           stoi(rows[14]),stoi(rows[15])){}
 }

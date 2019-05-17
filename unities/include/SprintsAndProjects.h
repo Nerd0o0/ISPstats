@@ -10,6 +10,7 @@ namespace unities {
         int sprintID;
         string project;
         std::string sprint;
+        int begin;
         boost::gregorian::date sprintBegin;
         boost::gregorian::date sprintEnd;
         int bugCount;
@@ -37,8 +38,9 @@ namespace unities {
                 {"sprintID",                p.sprintID},
                 {"project",                 p.project},
                 {"sprint",                  p.sprint},
-                {"sprintBegin",             boost::gregorian::to_simple_string(p.sprintBegin)},
-                {"sprintEnd",               boost::gregorian::to_simple_string(p.sprintEnd)},
+                {"begin",                   p.sprintBegin.day_number()-2440588}, //вычитаю количество дней с начала отсчета этой либы до 1.01.1970
+                //{"sprintBegin",             boost::gregorian::to_simple_string(p.sprintBegin)},
+                //{"sprintEnd",               boost::gregorian::to_simple_string(p.sprintEnd)},
                 {"bugCount",                p.bugCount},
                 {"estimationBugTime",       p.estimationBugTime},
                 {"completeBugCount",        p.completeBugCount},
