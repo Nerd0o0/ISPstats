@@ -6,7 +6,7 @@
 namespace unities {
     using namespace std;
 
-    JobsForPerson::JobsForPerson(int job_id, string project_name, int sprint_id, string sprint_name, int complete_count,
+    JobsForPerson::JobsForPerson(string project_name, int sprint_id, string sprint_name, int complete_count,
                                  int complete_est_time, int complete_fact_time,
                                  int incomplete_count, int incomplete_est_time, int incomplete_fact_time,
                                  int complete_help_time,
@@ -14,7 +14,7 @@ namespace unities {
                                  int code_returns,
                                  int code_discussion, int code_branches, int code_merged, int code_seen,
                                  int code_commented, int work_time) :
-            jobID(job_id), project(project_name), sprintID(sprint_id), sprint(sprint_name),
+            project(project_name), sprintID(sprint_id), sprint(sprint_name),
             completeCount(complete_count),
             completeEstTime(complete_est_time), completeFactTime(complete_fact_time),
             incompleteCount(incomplete_count), incompleteEstTime(incomplete_est_time),
@@ -24,7 +24,7 @@ namespace unities {
             codeBranches(code_branches), codeMerged(code_merged), codeSeen(code_seen),
             codeCommented(code_commented), workTime(work_time) {}
 
-    JobsForPerson::JobsForPerson(char **rows) : JobsForPerson(stoi(rows[0]), rows[1], stoi(rows[2]), rows[3],
+    JobsForPerson::JobsForPerson(char **rows) : JobsForPerson(rows[1], stoi(rows[2]), rows[3],
                                                               stoi(rows[4]), stoi(rows[5]), stoi(rows[6]),
                                                               stoi(rows[7]), stoi(rows[8]), stoi(rows[9]),
                                                               stoi(rows[10]),

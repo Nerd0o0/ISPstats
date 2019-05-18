@@ -76,10 +76,20 @@ void getJobsForSprint::HandleRestRequest(Poco::Net::HTTPServerRequest& request, 
     response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
     nlohmann::json result = nlohmann::json::array();
     DBConnector connector;
-    auto persons=connector.getJobsForSprint(getJobsForSprint::sprint_id);
-    for(auto person:persons){
-        result.push_back(person);
+    auto jobs=connector.getJobsForSprint(getJobsForSprint::sprint_id);
+    for(auto job:jobs){
+        result.push_back(job);
     }
     response.send() << result;
 }
-void getJobsForPerson::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) {}
+void getJobsForPerson::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) {
+    response.add("Access-Control-Allow-Origin","*");
+    response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
+    nlohmann::json result = nlohmann::json::array();
+    DBConnector connector;
+    auto jobs=connector.getJobsForPerson(getJobsForPerson::person_id);
+    for(auto job:jobs){
+        result.push_back(job);
+    }
+    response.send() << result;
+}

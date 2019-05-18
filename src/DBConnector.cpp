@@ -56,6 +56,7 @@ vector<unities::JobsForSprint> DBConnector::getJobsForSprint(int sprintID) {
                     ") AND (SELECT SprintEnd from Sprint where SprintID="+std::to_string(sprintID)+
                     ") WHERE Job.SprintID="+std::to_string(sprintID)+
                     " AND Job.PersonID=Person.PersonID GROUP BY Person.PersonID;";
+    std::cout<<query<<std::endl;
     mysql_query(connector, query.c_str());
     vector<unities::JobsForSprint> vector;
     if (res = mysql_store_result(connector)) {
@@ -65,11 +66,22 @@ vector<unities::JobsForSprint> DBConnector::getJobsForSprint(int sprintID) {
         }
         mysql_free_result(res);
     }
+    return vector;}
+    //SELECT Person.PersonID, Person.Name, CompleteCount, CompleteEstTime, CompleteFactTime, IncompleteCount, IncompleteEstTime, IncompleteFactTime, CompleteHelpTime, CompleteHelpCount, IncompleteHelpTime, IncompleteHelpCount, Job.CodeReturns, Job.CodeDiscussion, Job.CodeBranches, Job.CodeMerged, Job.CodeSeen, Job.CodeCommented, sum(JobTime) FROM Job, Person LEFT JOIN JobTime ON Person.PersonID=JobTime.PersonID AND DATE(JobDate) BETWEEN (SELECT SprintBegin from Sprint where SprintID=1) AND (SELECT SprintEnd from Sprint where SprintID=1) WHERE Job.SprintID=1 AND Job.PersonID=Person.PersonID GROUP BY Person.PersonID;
+
+vector<unities::JobsForPerson> DBConnector::getJobsForPerson(int person_id) {
+    std::string query = "select Project, Name, JobId, sum(JobTime) from (select Project.Name as Project, Job.PersonID as PersonID, Sprint.Name, SprintBegin, SprintEnd, Job.JobID from Project, Sprint, Job, JobTime where Project.ProjectID=Sprint.ProjectID AND Sprint.SprintID=Job.SprintID AND JobTime.PersonID=27 AND Job.PersonID=27 group by Sprint.SprintID) AS a left join JobTime on a.PersonID=JobTime.PersonID AND JobDate between SprintBegin and SprintEnd group by Name;"
+    mysql_query(connector, query.c_str());
+    vector<unities::JobsForPerson> vector;
+    if (res = mysql_store_result(connector)) {
+        //vector.resize(mysql_num_rows(res));
+        while (row = mysql_fetch_row(res)) {
+            vector.push_back(unities::JobsForPerson(row));
+        }
+        mysql_free_result(res);
+    }
     return vector;
-
 }
-
-vector<unities::JobsForPerson> getJobsForPerson() {}
 
 vector<unities::SprintBase> DBConnector::getSprints() {
     std::string query="SELECT DISTINCT Sprint.SprintID, Name FROM Sprint,Job \
