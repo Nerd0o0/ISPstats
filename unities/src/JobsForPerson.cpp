@@ -24,14 +24,15 @@ namespace unities {
             codeBranches(code_branches), codeMerged(code_merged), codeSeen(code_seen),
             codeCommented(code_commented), workTime(work_time) {}
 
-    JobsForPerson::JobsForPerson(char **rows) : JobsForPerson(rows[1], stoi(rows[2]), rows[3],
-                                                              stoi(rows[4]), stoi(rows[5]), stoi(rows[6]),
-                                                              stoi(rows[7]), stoi(rows[8]), stoi(rows[9]),
-                                                              stoi(rows[10]),
-                                                              stoi(rows[11]), stoi(rows[12]), stoi(rows[13]),
-                                                              stoi(rows[14]),
-                                                              stoi(rows[15]), stoi(rows[16]), stoi(rows[17]),
-                                                              stoi(rows[18]), stoi(rows[19]), stoi(rows[20])) {}
+    JobsForPerson::JobsForPerson(char **rows) : JobsForPerson(rows[0], stoi(rows[1]), rows[2],
+                                                              stoi(rows[3]), stoi(rows[4]), stoi(rows[5]),
+                                                              stoi(rows[6]), stoi(rows[7]), stoi(rows[8]),
+                                                              stoi(rows[9]),
+                                                              stoi(rows[10]), stoi(rows[11]), stoi(rows[12]),
+                                                              stoi(rows[13]),
+                                                              stoi(rows[14]), stoi(rows[15]), stoi(rows[16]),
+                                                              stoi(rows[17]), stoi(rows[18]),
+                                                              rows[19] == NULL ? 0 : stoi(rows[19])) {}
 
 
 }

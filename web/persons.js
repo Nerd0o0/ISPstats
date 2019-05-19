@@ -19,7 +19,7 @@ function sendRequest() {
                 days+'d '+ (hour<10?('0'+hour):hour) + ':' + (min<10?('0'+min):min):
                 (hour<10?('0'+hour):hour) + ':' + (min<10?('0'+min):min);
             $('#myTable tbody').append('<tr><td>' + item.project + '</td>' +
-                '<td><a href=sprint.jsp?index='+item.sprintID+'>' + item.sprint + '</a></td>' +
+                '<td><a href=sprints.html?index='+item.sprintID+'>' + item.sprint + '</a></td>' +
                 '<td data-sort-value=\'' + item.workTime + '\' align=\'right\'>' + workTime + '</td>' +
                 '<td data-sort-value=\''+item.completeCount+'\'>' + item.completeCount + '</td>' +
                 '<td data-sort-value=\'' + item.completeEstTime + '\' align=\'right\'>' + getDateString(item.completeEstTime) + '</td>' +
