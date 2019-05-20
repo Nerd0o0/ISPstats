@@ -21,3 +21,4 @@ target_link_libraries(${PROJECT_NAME} ${CONAN_LIBS})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}  mariadbclient)
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}  mariadb)
 
+

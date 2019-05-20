@@ -4,32 +4,49 @@
 #include <iostream>
 #include <Poco/Net/HTTPServerRequest.h>
 #include <regex>
+//#define DEBUG
 
 namespace handlers {
     HTTPRequestHandler *Factory::GetMethodHandlers(const std::string &uri) const {
         if (uri == "/" || uri == "/getProjects") {
+#ifdef DEBUG
             std::cout<<"geProjects"<<std::endl;
+#endif
             return new getProjects();
         } else if (uri == "/getSprints") {
+#ifdef DEBUG
             std::cout<<"getSprints"<<std::endl;
+#endif
             return new getSprints();
         } else if (uri == "/getPersons") {
+#ifdef DEBUG
             std::cout<<"getPersons"<<std::endl;
+#endif
             return new getPersons();
         }else if (std::smatch m; std::regex_match(uri, m, std::regex{R"(/getProjectForSprint/(\d+))"})) {
+#ifdef DEBUG
             std::cout<<"getProjectForSprint"<<m[1]<<std::endl;
+#endif
             return new getProjectForSprint(std::stoi(m[1]));
         } else if (std::smatch m; std::regex_match(uri, m, std::regex{R"(/getSprintsForProject/(\d+))"})) {
+#ifdef DEBUG
             std::cout<<"getSprintsForProjects"<<m[1]<<std::endl;
+#endif
             return new getSprintsForProject(std::stoi(m[1]));
         } else if (uri == "/getSprintsAndProjects") {
+#ifdef DEBUG
             std::cout<<"getSprintsAndProjects"<<std::endl;
+#endif
             return new getSprintsAndProjects;
         } else if (std::smatch m; std::regex_match(uri, m, std::regex{R"(/getJobsForSprint/(\d+))"})) {
+#ifdef DEBUG
             std::cout<<"getJobsForSprint"<<m[1]<<std::endl;
+#endif
             return new getJobsForSprint(std::stoi(m[1]));
         } else if (std::smatch m; std::regex_match(uri, m, std::regex{R"(/getJobsForPerson/(\d+))"})) {
+#ifdef DEBUG
             std::cout<<"getJobsForPerson"<<m[1]<<std::endl;
+#endif
             return new getJobsForPerson(std::stoi(m[1]));
         }
         return nullptr;
