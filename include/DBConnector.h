@@ -14,13 +14,13 @@ public:
     ~DBConnector();
 
     vector<unities::SprintsAndProjects> getSprintsAndProjects();
-    vector<unities::JobsForSprint> getJobsForSprint(int sprintID);
-    vector<unities::JobsForPerson> getJobsForPerson();
+    vector<unities::JobsForSprint> getJobsForSprint(int);
+    vector<unities::JobsForPerson> getJobsForPerson(int);
     vector<unities::SprintBase> getSprints();
     vector<unities::ProjectBase> getProjects();
-    vector<unities::ProjectBase> getProjectForSprint(int sprint_id);
+    vector<unities::ProjectBase> getProjectForSprint(int);
     vector<unities::PersonBase> getPersons();
-    vector<unities::SprintBase> getSprintsForProject(int id);
+    vector<unities::SprintBase> getSprintsForProject(int);
 
 private:
     MYSQL *connector;

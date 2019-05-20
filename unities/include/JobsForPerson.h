@@ -8,7 +8,6 @@ namespace unities {
 
     class JobsForPerson {
     public:
-        int jobID;
         string project;
         int sprintID;
         string sprint;
@@ -30,7 +29,7 @@ namespace unities {
         int codeCommented;
         int workTime;
 
-        JobsForPerson(int job_id, string project_name, int sprint_id, string sprint_name, int complete_count,
+        JobsForPerson(string project_name, int sprint_id, string sprint_name, int complete_count,
                       int complete_est_time, int complete_fact_time,
                       int incomplete_count, int incomplete_est_time, int incomplete_fact_time, int complete_help_time,
                       int complete_help_count, int incomplete_help_time, int incomplete_help_count, int code_returns,
@@ -41,7 +40,6 @@ namespace unities {
     };
     inline void to_json(nlohmann::json &j, const JobsForPerson &p) {
         j = nlohmann::json{
-                {"jobID",               p.jobID},
                 {"project",             p.project},
                 {"sprintID",            p.sprintID},
                 {"sprint",              p.sprint},
@@ -67,7 +65,6 @@ namespace unities {
     }
 
     inline void from_json(const nlohmann::json &j, JobsForPerson &p) {
-        j.at("jobID").get_to(p.jobID);
         j.at("project").get_to(p.project);
         j.at("sprintID").get_to(p.sprintID);
         j.at("sprint").get_to(p.sprint);
