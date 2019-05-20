@@ -1,0 +1,18 @@
+.footable-sortable{
+    cursor: pointer;
+}
+.footable-sortable:hover .fooicon-sort{
+    opacity: 1;
+}
+.fooicon-sort{
+    opacity: 0;
+}
+.fooicon-sort:after{
+    content: "\21c5";
+}
+.fooicon-sort-asc:after{
+    content: "\21ca";
+}
+.fooicon-sort-desc:after{
+    content: "\21c8";
+}

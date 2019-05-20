@@ -1,30 +1,11 @@
 <html>
 <head>
-    <title>Статистика по людям во всех проектах и спринтах</title>
-    <link href="footable-bootstrap.latest/css/footable.bootstrap.min.css" rel="stylesheet">
-    <script src="jquery.min.js"></script>
-    <script src="footable-bootstrap.latest/js/footable.min.js"></script>
-    <script src="persons.js"></script>
-    <style>
-        .footable-sortable{
-            cursor: pointer;
-        }
-        .footable-sortable:hover .fooicon-sort{
-            opacity: 1;
-        }
-        .fooicon-sort{
-            opacity: 0;
-        }
-        .fooicon-sort:after{
-            content: "\21c5";
-        }
-        .fooicon-sort-asc:after{
-            content: "\21ca";
-        }
-        .fooicon-sort-desc:after{
-            content: "\21c8";
-        }
-    </style>
+    <title>Статистика по сотрудникам во всех проектах и спринтах</title>
+    <link href="scripts/footable-bootstrap.latest/css/footable.bootstrap.min.css" rel="stylesheet">
+    <link href="styles/footable_styles.css" rel="stylesheet">
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/footable-bootstrap.latest/js/footable.min.js"></script>
+    <script src="scripts/persons.js"></script>
 </head>
 <body onload="getPersons();openFromLink()">
 <a href="sprints.html">Статистика по спринтам</a><br/>
@@ -33,7 +14,6 @@
 </select>
 <button id="button" class="button" onclick="sendRequest()">Поиск</button>
 <table class="table table-striped" id="myTable" data-paging="true" cellspacing="0" border="1" data-sorting="true">
-
     <thead><tr>
         <td></td>
         <td></td>
