@@ -1,31 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8">
-    <title>Статистика по студентам и командам</title>
-    <link href="footable-bootstrap.latest/css/footable.bootstrap.min.css" rel="stylesheet">
-    <script src="jquery.min.js"></script>
-    <script src="footable-bootstrap.latest/js/footable.min.js"></script>
-    <script src="sprints.js"></script>
-    <style>
-        .footable-sortable{
-            cursor: pointer;
-        }
-        .footable-sortable:hover .fooicon-sort{
-            opacity: 1;
-        }
-        .fooicon-sort{
-            opacity: 0;
-        }
-        .fooicon-sort:after{
-            content: "\21c5";
-        }
-        .fooicon-sort-asc:after{
-            content: "\21ca";
-        }
-        .fooicon-sort-desc:after{
-            content: "\21c8";
-        }
-    </style>
+    <title>Статистика по спринтам и командам</title>
+    <link href="scripts/footable-bootstrap.latest/css/footable.bootstrap.min.css" rel="stylesheet">
+    <link href="styles/footable_styles.css" rel="stylesheet">
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/footable-bootstrap.latest/js/footable.min.js"></script>
+    <script src="scripts/sprints.js"></script>
 </head>
 <body onload="getProjects();getSprints();openFromLink()">
 <a href="persons.html">Статистика по сотрудникам</a><br/>
