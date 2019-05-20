@@ -53,16 +53,37 @@ function sendRequest() {
         FooTable.get('#myTable').pageSize(15);
     }
     var select = document.getElementById('selectPerson');
-    var arg = select.options.item(select.options.selectedIndex).getAttribute('id');
-    httpRequest.open('GET', 'http://localhost:8080/getJobsForPerson/' + arg, true);
+    var arg = select.options.item(select.options.selectedIndex).getAttribute('id').substr(7);
+    httpRequest.open('GET', 'http://localhost:8080/getJobsForPerson/' + arg, false);
     httpRequest.send(null);
-};
-var id=window.location.search.substring(11);
-if(id){
-    alert(id);
-    var select = document.getElementById('selectPerson');
-    //найти элемент с нужным индексом (они были отсортированы, id в базе и индекс в списке не совпадают)
-    var index=document.getElementById(id).getAttribute("num");
-    select.selectedIndex=Number(index);
-    sendRequest();
+}
+function getPersons(){
+    var httpRequest;
+    if(window.XMLHttpRequest){ //Mozilla, Safari
+        httpRequest=new XMLHttpRequest();
+    } else if(Window.ActiveXObject){ //IE
+        httpRequest=new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    httpRequest.overrideMimeType('text/ajax');
+    httpRequest.onload=function() {
+        $('#selectPerson option').remove();
+        var sprints=JSON.parse(this.response);
+        var a=0;
+        sprints.forEach(function(item,i,arr){
+            $('#selectPerson').append('<option id=\'person_'+item.personID+'\' num='+a+'>'+item.name+'</option>');
+            a++;
+        });
+    }
+    httpRequest.open('GET', 'http://localhost:8080/getPersons', false);
+    httpRequest.send(null);
+}
+function openFromLink() {
+    var id = window.location.search.substring(11);
+    if (id) {
+        var select = document.getElementById('selectPerson');
+        //найти элемент с нужным индексом (они были отсортированы, id в базе и индекс в списке не совпадают)
+        var index = document.getElementById("person_" + id).getAttribute("num");
+        select.selectedIndex = Number(index);
+        sendRequest();
+    }
 }

@@ -14,7 +14,7 @@ namespace handlers {
             std::cout<<"getSprints"<<std::endl;
             return new getSprints();
         } else if (uri == "/getPersons") {
-            std::cout<<"getPerson"<<std::endl;
+            std::cout<<"getPersons"<<std::endl;
             return new getPersons();
         }else if (std::smatch m; std::regex_match(uri, m, std::regex{R"(/getProjectForSprint/(\d+))"})) {
             std::cout<<"getProjectForSprint"<<m[1]<<std::endl;

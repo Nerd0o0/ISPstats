@@ -63,7 +63,7 @@ function sendRequest(){
             var workTime=days>0?
                 days+'d '+ (hour<10?('0'+hour):hour) + ':' + (min<10?('0'+min):min):
                 (hour<10?('0'+hour):hour) + ':' + (min<10?('0'+min):min);
-            $('#myTable tbody').append('<tr><td><a href=\'persons.html/'+item.personID+'\'>'+item.person+'</a></td>' +
+            $('#myTable tbody').append('<tr><td><a href=\'persons.html?person_id='+item.personID+'\'>'+item.person+'</a></td>' +
                 '<td data-sort-value=\''+item.workTime+'\' align=\'right\'>'+ workTime +'</td>' +
                 '<td data-sort-value=\''+item.completeCount+'\'>'+item.completeCount+'</td>' +
                 '<td data-sort-value=\''+item.completeEstTime+'\' align=\'right\'>'+getDateString(item.completeEstTime)+'</td>' +

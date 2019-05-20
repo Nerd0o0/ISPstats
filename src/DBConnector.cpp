@@ -55,7 +55,6 @@ vector<unities::JobsForSprint> DBConnector::getJobsForSprint(int sprintID) {
                         ") AND (SELECT SprintEnd from Sprint where SprintID="+std::to_string(sprintID)+
                         ") WHERE Job.SprintID="+std::to_string(sprintID)+
                         " AND Job.PersonID=Person.PersonID GROUP BY Person.PersonID;";
-    std::cout<<query<<std::endl;
     mysql_query(connector, query.c_str());
     vector<unities::JobsForSprint> vector;
     if (res = mysql_store_result(connector)) {
@@ -141,7 +140,7 @@ vector<unities::ProjectBase> DBConnector::getProjectForSprint(int sprint_id) {
     return vector;
 }
 vector<unities::PersonBase> DBConnector::getPersons() {
-    std::string query="SELECT PersonID, Name FROM Person ORDER BY Person.Name ORDER BY Person.Name;";
+    std::string query="SELECT PersonID, Name FROM Person ORDER BY Name;";
     mysql_query(connector, query.c_str());
     vector<unities::PersonBase> vector;
     if (res = mysql_store_result(connector)) {

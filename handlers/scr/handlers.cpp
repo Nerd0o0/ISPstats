@@ -6,7 +6,6 @@ void getProjects::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco:
     response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
     nlohmann::json result = nlohmann::json::array();
     DBConnector connector;
-    std::cout<<"getProjects"<<std::endl;
     auto projects = connector.getProjects();
     for (auto project:projects) {
         result.push_back(project);
@@ -18,7 +17,6 @@ void getSprints::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::
     response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
     nlohmann::json result = nlohmann::json::array();
     DBConnector connector;
-    std::cout<<"getSprints"<<std::endl;
     auto sprints = connector.getSprints();
     for (auto sprint:sprints) {
         result.push_back(sprint);
@@ -30,7 +28,6 @@ void getPersons::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::
     response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
     nlohmann::json result = nlohmann::json::array();
     DBConnector connector;
-    std::cout<<"getPersons"<<std::endl;
     auto persons=connector.getPersons();
     for(auto person:persons){
         result.push_back(person);
@@ -42,7 +39,6 @@ void getProjectForSprint::HandleRestRequest(Poco::Net::HTTPServerRequest& reques
     response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
     nlohmann::json result = nlohmann::json::array();
     DBConnector connector;
-    std::cout<<"getProjectForSprint"<<std::endl;
     auto persons=connector.getProjectForSprint(sprint_id);
     for(auto person:persons){
         result.push_back(person);
