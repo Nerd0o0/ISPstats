@@ -168,3 +168,22 @@ vector<unities::SprintBase> DBConnector::getSprintsForProject(int id) {
     }
     return vector;
 }
+unities::PersonBase DBConnector::getMinRatioPerson() {
+    std::string query = "select a.PersonID, Person.Name, ratio from \
+                        (select PersonID, SprintID, avg(completeFactTime/completeEstTime) as ratio \
+                        from Job group by PersonID) as a, Person where ratio>0 AND \
+                        a.PersonID=Person.PersonID order by ratio;";
+    mysql_query(connector, query.c_str());
+    //unities::PersonBase person=NULL;
+    if (res = mysql_store_result(connector)) {
+        //vector.resize(mysql_num_rows(res));
+        if(row = mysql_fetch_row(res)) {
+            unities::PersonBase person(row);
+            mysql_free_result(res);
+            return person;
+        }
+        mysql_free_result(res);
+    }
+    return NULL;
+
+}
