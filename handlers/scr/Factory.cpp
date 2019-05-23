@@ -4,11 +4,14 @@
 #include <iostream>
 #include <Poco/Net/HTTPServerRequest.h>
 #include <regex>
+#include "../../include/Logger.h"
+
 //#define DEBUG
 
 namespace handlers {
     HTTPRequestHandler *Factory::GetMethodHandlers(const std::string &uri) const {
         if (uri == "/" || uri == "/getProjects") {
+            Logger::GetLogger().information("/getProjects");
 #ifdef DEBUG
             std::cout<<"geProjects"<<std::endl;
 #endif
@@ -48,6 +51,9 @@ namespace handlers {
             std::cout<<"getJobsForPerson"<<m[1]<<std::endl;
 #endif
             return new getJobsForPerson(std::stoi(m[1]));
+        } else if (uri == "/getLeadersList"){
+            std::cout<<"getLeadersList"<<std::endl;
+            return new getLeadersList();
         }
         return nullptr;
     }

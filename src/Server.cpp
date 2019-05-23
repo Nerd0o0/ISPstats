@@ -12,6 +12,7 @@
 #include <Poco/ScopedLock.h>
 #include <Poco/URI.h>
 #include <Poco/StringTokenizer.h>
+#include "../include/Logger.h"
 
 int Server::main(const std::vector<std::string> &)
 {
@@ -22,7 +23,9 @@ int Server::main(const std::vector<std::string> &)
     Poco::Net::SocketAddress socket_address("127.0.0.1:8080");
     Poco::Net::ServerSocket socket;
     socket.bind(socket_address,true,false);
+    //Logger::GetLogger().information(socket_address.toString());
     socket.listen(100);
+
 	Poco::Net::HTTPServer server(new handlers::Factory(), socket, parameters);
 
 	server.start();

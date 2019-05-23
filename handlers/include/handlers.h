@@ -17,39 +17,62 @@ class RestHandler : public Poco::Net::HTTPRequestHandler {
             response.send() << result;
         }
     }
+
     virtual void HandleRestRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) = 0;
 };
 
-class getProjects:public RestHandler{
-    void HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) override;
+class getProjects : public RestHandler {
+    void HandleRestRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) override;
 };
 
-class getSprints:public RestHandler{
-    void HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) override;
+class getSprints : public RestHandler {
+    void HandleRestRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) override;
 };
-class getPersons:public RestHandler{
-    void HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) override;
+
+class getPersons : public RestHandler {
+    void HandleRestRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) override;
 };
-class getProjectForSprint:public RestHandler{
+
+class getProjectForSprint : public RestHandler {
     int sprint_id;
-    void HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) override;
-public: getProjectForSprint(int id):sprint_id(id){}
+
+    void HandleRestRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) override;
+
+public:
+    getProjectForSprint(int id) : sprint_id(id) {}
 };
-class getSprintsForProject:public RestHandler{
+
+class getSprintsForProject : public RestHandler {
     int project_id;
-    void HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) override;
-public: getSprintsForProject(int id):project_id(id){}
+
+    void HandleRestRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) override;
+
+public:
+    getSprintsForProject(int id) : project_id(id) {}
 };
-class getSprintsAndProjects:public RestHandler{
-    void HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) override;
+
+class getSprintsAndProjects : public RestHandler {
+    void HandleRestRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) override;
 };
-class getJobsForSprint:public RestHandler{
+
+class getJobsForSprint : public RestHandler {
     int sprint_id;
-    void HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) override;
-public: getJobsForSprint(int id):sprint_id(id){}
+
+    void HandleRestRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) override;
+
+public:
+    getJobsForSprint(int id) : sprint_id(id) {}
 };
-class getJobsForPerson:public RestHandler{
+
+class getJobsForPerson : public RestHandler {
     int person_id;
-    void HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) override;
-public: getJobsForPerson(int id):person_id(id){}
+
+    void HandleRestRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) override;
+
+public:
+    getJobsForPerson(int id) : person_id(id) {}
+};
+
+class getLeadersList : public RestHandler {
+    void HandleRestRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) override;
 };

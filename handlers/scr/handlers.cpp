@@ -89,3 +89,12 @@ void getJobsForPerson::HandleRestRequest(Poco::Net::HTTPServerRequest& request, 
     }
     response.send() << result;
 }
+void getLeadersList::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response) {
+    response.add("Access-Control-Allow-Origin","*");
+    response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
+    nlohmann::json result = nlohmann::json::array();
+    DBConnector connector;
+    auto person=connector.getMinRatioPerson();
+    result.push_back(person);
+    response.send() << result;
+}
