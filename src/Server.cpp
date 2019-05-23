@@ -16,21 +16,26 @@
 
 int Server::main(const std::vector<std::string> &)
 {
-    auto *parameters=new Poco::Net::HTTPServerParams();
-    parameters->setTimeout(10000);
-    parameters->setMaxQueued(100);
-    parameters->setMaxThreads(2);
-    Poco::Net::SocketAddress socket_address("127.0.0.1:8080");
-    Poco::Net::ServerSocket socket;
-    socket.bind(socket_address,true,false);
-    //Logger::GetLogger().information(socket_address.toString());
-    socket.listen(100);
+    try {
+        auto *parameters = new Poco::Net::HTTPServerParams();
+        parameters->setTimeout(10000);
+        parameters->setMaxQueued(100);
+        parameters->setMaxThreads(2);
+        Poco::Net::SocketAddress socket_address("127.0.0.1:8080");
+        Poco::Net::ServerSocket socket;
+        socket.bind(socket_address, true, false);
+        Logger::GetLogger().information("Server start at " + socket_address.toString());
+        socket.listen(100);
 
-	Poco::Net::HTTPServer server(new handlers::Factory(), socket, parameters);
+        Poco::Net::HTTPServer server(new handlers::Factory(), socket, parameters);
+        server.start();
 
-	server.start();
-	waitForTerminationRequest();
-	server.stopAll();
-	socket.close();
-	return Application::EXIT_OK;
+        waitForTerminationRequest();
+        server.stopAll();
+        socket.close();
+        Logger::GetLogger().information("Server stop with exit code " + std::to_string(Application::EXIT_OK));
+        return Application::EXIT_OK;
+    }catch(Poco::Exception e){
+        Logger::GetLogger().information("Server stop " + std::string(e.what()));
+    }
 }
