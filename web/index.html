@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <link href="scripts/footable-bootstrap.latest/css/footable.bootstrap.min.css" rel="stylesheet">
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/leaders.js"></script>
     <title>Страница лидеров</title>
 </head>
-<body>
+<body onload="getLeadersList()">
 <a href="projects.html">Статистика по командам/проектам</a><br/>
 <a href="sprints.html">Статистика по спринтам</a><br/>
 <a href="persons.html">Статистика по сотрудникам</a><br/>
-
+<div id="fasterPerson"></div>
+<div id="goodCodePerson"></div>
+<div id="helpfullPerson"></div>
+<div id="fasterCommand"></div>
+<div id="hardCommand"></div>
 </body>
 </html>

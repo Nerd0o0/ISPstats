@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <string>
+#include <signal.h>
 
 #include "../handlers/include/Factory.h"
 #include "../include/Server.h"
@@ -14,9 +15,13 @@
 #include <Poco/StringTokenizer.h>
 #include "../include/Logger.h"
 
+void posix_death_signal(int);
+
 int Server::main(const std::vector<std::string> &)
 {
     try {
+        signal(SIGSEGV, posix_death_signal);
+
         auto *parameters = new Poco::Net::HTTPServerParams();
         parameters->setTimeout(10000);
         parameters->setMaxQueued(100);
@@ -36,6 +41,14 @@ int Server::main(const std::vector<std::string> &)
         Logger::GetLogger().information("Server stop with exit code " + std::to_string(Application::EXIT_OK));
         return Application::EXIT_OK;
     }catch(Poco::Exception e){
-        Logger::GetLogger().information("Server stop " + std::string(e.what()));
+        Logger::GetLogger().critical("Server stop with Poco Server Exception: " + std::string(e.what()));
+    }catch(std::exception e){
+        Logger::GetLogger().critical("Server stop with std Exception: " + std::string(e.what()));
     }
+}
+void posix_death_signal(int signum)
+{
+    std::cout<<"SIGSEGV"<<std::endl;
+    signal(signum, SIG_DFL);
+    exit(3);
 }

@@ -18,7 +18,7 @@ add_executable(${PROJECT_NAME} main.cpp src/Server.cpp include/Server.h src/DBCo
         unities/include/ProjectBase.h unities/src/SprintsAndProjects.cpp unities/include/SprintsAndProjects.h
         unities/src/JobsForPerson.cpp unities/include/JobsForPerson.h unities/src/SprintBase.cpp
         unities/include/SprintBase.h unities/src/JobsForSprint.cpp unities/include/JobsForSprint.h
-        handlers/scr/handlers.cpp handlers/include/handlers.h include/Logger.h src/Logger.cpp)
+        handlers/scr/handlers.cpp handlers/include/handlers.h include/Logger.h src/Logger.cpp unities/src/LeaderPerson.cpp unities/include/LeaderPerson.h)
 
 
 target_link_libraries(${PROJECT_NAME} ${CONAN_LIBS})
