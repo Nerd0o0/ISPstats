@@ -5,6 +5,7 @@
 #include "../unities/include/SprintBase.h"
 #include "../unities/include/ProjectBase.h"
 #include "../unities/include/PersonBase.h"
+#include "../unities/include/LeaderPerson.h"
 #include "mysql.h"
 
 using namespace std;
@@ -21,7 +22,8 @@ public:
     vector<unities::ProjectBase> getProjectForSprint(int);
     vector<unities::PersonBase> getPersons();
     vector<unities::SprintBase> getSprintsForProject(int);
-    unities::PersonBase getMinRatioPerson();
+    vector<unities::LeaderPerson> getMinRatioPerson();
+    unities::LeaderPerson getMinDiscussionsAndReturnsPerson();
 
 private:
     MYSQL *connector;

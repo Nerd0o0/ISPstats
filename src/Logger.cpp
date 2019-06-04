@@ -2,6 +2,7 @@
 
 Poco::Logger &Logger::InitLogger() {
     //Poco::AutoPtr<Poco::ConsoleChannel> console(new Poco::ConsoleChannel);
+
     Poco::AutoPtr<Poco::SimpleFileChannel> file(new Poco::SimpleFileChannel("/home/nerd/CLionProjects/ISPstats/log.log"));
     file->open();
     Poco::AutoPtr<Poco::PatternFormatter> formatter(new Poco::PatternFormatter);
