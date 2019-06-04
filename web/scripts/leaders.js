@@ -8,12 +8,12 @@ function getLeadersList() {
     httpRequest.overrideMimeType('text/ajax');
     httpRequest.onload = function () {
         var data = JSON.parse(this.response);
-        data.forEach(function (item, i, arr) {
+        data.fasterPerson.forEach(function (item, i, arr) {
             console.log(item);
-            $('#fasterPerson').append("<p>" + item.fasterPerson.name + "<br/>" + item.fasterPerson.personID + "<br/>" + item.fasterPerson.value + "</p>");
+            $('#fasterPerson').append("<p>" + item.name + "<br/>" + item.personID + "<br/>" + item.value + "</p>");
         });
 
-    }
+    };
     httpRequest.open('GET', 'http://localhost:8080/getLeadersList', false);
     httpRequest.send(null);
 }

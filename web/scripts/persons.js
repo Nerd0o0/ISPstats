@@ -57,21 +57,21 @@ function sendRequest() {
     httpRequest.open('GET', 'http://localhost:8080/getJobsForPerson/' + arg, false);
     httpRequest.send(null);
 }
-function getPersons(){
+function getPersons() {
     var httpRequest;
-    if(window.XMLHttpRequest){ //Mozilla, Safari
-        httpRequest=new XMLHttpRequest();
-    } else if(Window.ActiveXObject){ //IE
-        httpRequest=new ActiveXObject('Microsoft.XMLHTTP');
+    if (window.XMLHttpRequest) { //Mozilla, Safari
+        httpRequest = new XMLHttpRequest();
+    } else if (Window.ActiveXObject) { //IE
+        httpRequest = new ActiveXObject('Microsoft.XMLHTTP');
     }
     httpRequest.overrideMimeType('text/ajax');
-    httpRequest.onload=function() {
+    httpRequest.onload = function () {
         $('#selectPerson option').remove();
-        var sprints=JSON.parse(this.response);
-        sprints.forEach(function(item,i,arr){
-            $('#selectPerson').append('<option id=\'person_'+item.personID+'\' num='+i+'>'+item.name+'</option>');
+        var sprints = JSON.parse(this.response);
+        sprints.forEach(function (item, i, arr) {
+            $('#selectPerson').append('<option id=\'person_' + item.personID + '\' num=' + i + '>' + item.name + '</option>');
         });
-    }
+    };
     httpRequest.open('GET', 'http://localhost:8080/getPersons', false);
     httpRequest.send(null);
 }

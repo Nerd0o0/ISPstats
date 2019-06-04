@@ -95,7 +95,7 @@ void getLeadersList::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Po
     nlohmann::json result;
     nlohmann::json array;
     DBConnector connector;
-    auto persons=connector.getMinRatioPerson();
+    auto persons=connector.getMinRatioPersons();
     for(auto person:persons){
         array.push_back(person);
     }

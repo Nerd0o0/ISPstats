@@ -22,8 +22,7 @@ public:
     vector<unities::ProjectBase> getProjectForSprint(int);
     vector<unities::PersonBase> getPersons();
     vector<unities::SprintBase> getSprintsForProject(int);
-    vector<unities::LeaderPerson> getMinRatioPerson();
-    unities::LeaderPerson getMinDiscussionsAndReturnsPerson();
+    vector<unities::LeaderPerson> getMinRatioPersons();
 
 private:
     MYSQL *connector;
