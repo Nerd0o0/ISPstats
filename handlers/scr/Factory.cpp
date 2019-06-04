@@ -42,7 +42,7 @@ namespace handlers {
             //Самая загруженная команда, больше всего запланировано часов, спринт в процессе
             return new getLeadersList();
         }
-        Logger::GetLogger().information("Unknown uri " + uri);
+        Logger::GetLogger().error("Unknown uri " + uri);
         return nullptr;
     }
     HTTPRequestHandler *Factory::PostMethodHandlers(const std::string &uri) const {

@@ -51,7 +51,7 @@ function sendRequest() {
 
         $('#myTable').footable();
         FooTable.get('#myTable').pageSize(15);
-    }
+    };
     var select = document.getElementById('selectPerson');
     var arg = select.options.item(select.options.selectedIndex).getAttribute('id').substr(7);
     httpRequest.open('GET', 'http://localhost:8080/getJobsForPerson/' + arg, false);
@@ -68,10 +68,8 @@ function getPersons(){
     httpRequest.onload=function() {
         $('#selectPerson option').remove();
         var sprints=JSON.parse(this.response);
-        var a=0;
         sprints.forEach(function(item,i,arr){
-            $('#selectPerson').append('<option id=\'person_'+item.personID+'\' num='+a+'>'+item.name+'</option>');
-            a++;
+            $('#selectPerson').append('<option id=\'person_'+item.personID+'\' num='+i+'>'+item.name+'</option>');
         });
     }
     httpRequest.open('GET', 'http://localhost:8080/getPersons', false);

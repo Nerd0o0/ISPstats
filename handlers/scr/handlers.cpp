@@ -93,8 +93,12 @@ void getLeadersList::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Po
     response.add("Access-Control-Allow-Origin","*");
     response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
     nlohmann::json result;
+    nlohmann::json array;
     DBConnector connector;
-    auto person=connector.getMinRatioPerson();
-    result["fasterPerson"]=person;
+    auto persons=connector.getMinRatioPerson();
+    for(auto person:persons){
+        array.push_back(person);
+    }
+    result["fasterPerson"]=array;
     response.send() << result;
 }
