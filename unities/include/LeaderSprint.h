@@ -8,7 +8,7 @@ namespace unities {
     public:
         double SprintValue;
         LeaderSprint(int sprint_id, string n);
-        LeaderSprint()
+        LeaderSprint();
     };
 }
 

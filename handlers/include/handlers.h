@@ -2,6 +2,7 @@
 
 #include <Poco/Net/HTTPRequestHandler.h>
 #include <Poco/Net/HTTPServerResponse.h>
+#include <Poco/Net/HTTPServerRequest.h>
 #include <nlohmann/json.hpp>
 #include <iostream>
 #include "../../include/DBConnector.h"
@@ -74,5 +75,9 @@ public:
 };
 
 class getLeadersList : public RestHandler {
+    void HandleRestRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) override;
+};
+
+class updateDatabase : public RestHandler {
     void HandleRestRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) override;
 };

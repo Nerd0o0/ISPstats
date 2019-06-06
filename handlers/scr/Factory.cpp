@@ -46,9 +46,9 @@ namespace handlers {
         return nullptr;
     }
     HTTPRequestHandler *Factory::PostMethodHandlers(const std::string &uri) const {
-        /*if (uri == "/" || uri=="/index" || uri=="/projects") {
-            //return new UserMeetingList();
-        }*/
+        if (uri=="/update-database" || uri=="/projects") {
+            return new updateDatabase();
+        }
         return nullptr;
     }
     Poco::Net::HTTPRequestHandler *Factory::createRequestHandler(const Poco::Net::HTTPServerRequest &request) {

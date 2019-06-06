@@ -7,15 +7,18 @@
     <script src="scripts/footable-bootstrap.latest/js/footable.min.js"></script>
     <script src="scripts/leaders.js"></script>
     <title>Страница лидеров</title>
+    <style>
+        .number{
+            font-size: 5ch;
+        }
+    </style>
 </head>
 <body onload="getLeadersList()">
 <a href="projects.html">Статистика по командам/проектам</a><br/>
 <a href="sprints.html">Статистика по спринтам</a><br/>
 <a href="persons.html">Статистика по сотрудникам</a><br/>
-<div id="fasterPerson"></div>
-<div id="goodCodePerson"></div>
-<div id="helpfullPerson"></div>
-<div id="fasterCommand"></div>
-<div id="hardCommand"></div>
+<table class="table table-striped" id="fasterPerson">
+    <thead><tr><td>Место</td><td>Быстрее всего выполняет задачи</td></tr>
+    </thead></table>
 </body>
 </html>

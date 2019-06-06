@@ -7,4 +7,5 @@ namespace unities {
     using namespace std;
         SprintBase::SprintBase(int sprint_id, std::string n):sprintID(sprint_id), name(n){}
         SprintBase::SprintBase(char **rows):SprintBase(stoi(rows[0]),rows[1]){}
+        SprintBase::SprintBase(){}
 }

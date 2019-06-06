@@ -12,6 +12,7 @@ namespace unities {
 
         SprintBase(int sprint_id, std::string n);
         SprintBase(char **rows);
+        SprintBase();
 
     };
 

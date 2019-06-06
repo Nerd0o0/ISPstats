@@ -1,5 +1,75 @@
-SELECT Person.PersonID, JobID, sum(JobTime) FROM Job, Person LEFT JOIN JobTime ON Person.PersonID=JobTime.PersonID AND DATE(JobDate) BETWEEN '2017-06-26' AND '2017-07-08' WHERE Job.SprintID=1 AND Job.PersonID=Person.PersonID GROUP BY Person.PersonID;
+create table Project(
+ProjectID INT AUTO_INCREMENT,
+Name VARCHAR(255),
+PRIMARY KEY (ProjectID));
+ALTER TABLE Project CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE Project DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-SELECT Person.PersonID, Person.Name, CompleteCount, CompleteEstTime, CompleteFactTime, IncompleteCount, IncompleteEstTime, IncompleteFactTime, CompleteHelpTime, CompleteHelpCount, IncompleteHelpTime, IncompleteHelpCount, Job.CodeReturns, Job.CodeDiscussion, Job.CodeBranches, Job.CodeMerged, Job.CodeSeen, Job.CodeCommented, sum(JobTime) FROM Project,Job,Sprint, Person LEFT JOIN JobTime ON Person.PersonID=JobTime.PersonID AND DATE(JobDate) BETWEEN (SELECT SprintBegin FROM Sprint WHERE SprintID=1) AND (SELECT SprintEnd FROM Sprint WHERE SprintID=1) WHERE Job.SprintID=1 AND Job.PersonID=Person.PersonID GROUP BY Person.PersonID;
+create table Person(
+PersonID INT AUTO_INCREMENT,
+ProjectID INT,
+Name VARCHAR(255),
+PRIMARY KEY (PersonID),
+FOREIGN KEY (ProjectID) REFERENCES Project(ProjectID));
+ALTER TABLE Person CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE Person DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-SELECT Person.PersonID, Person.Name, CompleteCount, CompleteEstTime, CompleteFactTime, IncompleteCount, IncompleteEstTime, IncompleteFactTime, CompleteHelpTime, CompleteHelpCount, IncompleteHelpTime, IncompleteHelpCount, Job.CodeReturns, Job.CodeDiscussion, Job.CodeBranches, Job.CodeMerged, Job.CodeSeen, Job.CodeCommented, sum(JobTime) FROM Job, Person LEFT JOIN JobTime ON Person.PersonID=JobTime.PersonID AND DATE(JobDate) BETWEEN '2017-06-26' AND '2017-07-08' WHERE Job.SprintID=1 AND Job.PersonID=Person.PersonID GROUP BY Person.PersonID;
+create table Sprint(
+SprintID INT AUTO_INCREMENT,
+ProjectID INT NOT NULL,
+Name VARCHAR(255),
+SprintBegin DATE,
+SprintEnd DATE,
+BugCount INT,
+EstimationBugTime INT,
+CompleteBugCount INT,
+CompleteBugEstimation INT,
+CompleteBugFact INT,
+IncompleteBugCount INT,
+IncompleteBugEstimation INT,
+IncompleteBugFact INT,
+CodeBranches INT,
+CodeDiscussion INT,
+CodeReturns INT,
+PRIMARY KEY (SprintID),
+FOREIGN KEY (ProjectID) REFERENCES Project(ProjectID));
+ALTER TABLE Sprint CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE Sprint DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+create table Job(
+JobID INT AUTO_INCREMENT,
+PersonID INT NOT NULL,
+SprintID INT NOT NULL,
+CompleteCount INT,
+CompleteEstTime INT,
+CompleteFactTime INT,
+IncompleteCount INT,
+IncompleteEstTime INT,
+IncompleteFactTime INT,
+CompleteHelpTime INT,
+CompleteHelpCount INT,
+IncompleteHelpTime INT,
+IncompleteHelpCount INT,
+CodeReturns INT,
+CodeDiscussion INT,
+CodeBranches INT,
+CodeMerged INT,
+CodeSeen INT,
+CodeCommented INT,
+PRIMARY KEY (JobID),
+FOREIGN KEY (PersonID) REFERENCES Person(PersonID),
+FOREIGN KEY (SprintID) REFERENCES Sprint(SprintID));
+ALTER TABLE Job CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE Job DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+create table JobTime(
+JobTimeID INT AUTO_INCREMENT,
+PersonID INT NOT NULL,
+JobTime INT,
+JobBegin INT,
+JobEnd INT,
+JobDate DATE NOT NULL,
+PRIMARY KEY (JobTimeID, PersonID),
+FOREIGN KEY (PersonID) REFERENCES Person(PersonID));
+ALTER TABLE JobTime CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE JobTime DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;

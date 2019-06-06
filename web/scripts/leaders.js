@@ -7,10 +7,9 @@ function getLeadersList() {
     }
     httpRequest.overrideMimeType('text/ajax');
     httpRequest.onload = function () {
-        var data = JSON.parse(this.response);
+        let data = JSON.parse(this.response);
         data.fasterPerson.forEach(function (item, i, arr) {
-            console.log(item);
-            $('#fasterPerson').append("<p>" + item.name + "<br/>" + item.personID + "<br/>" + item.value + "</p>");
+            $('#fasterPerson').append("<tr><td class='number'>"+(i+1)+"</td><td>" + item.name + "<br/>" + item.personID + "<br/>" + item.value + "</td></tr>");
         });
 
     };

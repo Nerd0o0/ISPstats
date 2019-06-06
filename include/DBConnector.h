@@ -12,6 +12,7 @@ using namespace std;
 class DBConnector {
 public:
     DBConnector();
+    DBConnector(string user, string password);
     ~DBConnector();
 
     vector<unities::SprintsAndProjects> getSprintsAndProjects();
@@ -23,6 +24,8 @@ public:
     vector<unities::PersonBase> getPersons();
     vector<unities::SprintBase> getSprintsForProject(int);
     vector<unities::LeaderPerson> getMinRatioPersons();
+    int initDatabase();
+    int loadData(std::istream&);
 
 private:
     MYSQL *connector;

@@ -10,7 +10,7 @@ namespace unities {
         std::string name;
         ProjectBase(int project_id, std::string n);
         ProjectBase(char **rows);
-        ProjectBase(){}
+        ProjectBase();
     };
     inline void to_json(nlohmann::json &j, const ProjectBase &p) {
         j = nlohmann::json{
