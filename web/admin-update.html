@@ -8,9 +8,13 @@
     <title>Добавление информации в БД</title>
 </head>
 <body>
-<form enctype="multipart/form-data" method="post">
-    <input type="file" id="file">
-    <input type="button" value="GO" onclick="send()">
+<form enctype="multipart/form-data" method="post" style="margin: 10px">
+    <div class="form-group">
+        <label for="file">Выберите файл формата txt для обновления БД</label>
+    <input class="form-control"  type="file" id="file">
+    </div>
+    <input class="btn btn-primary" type="button" value="Зарузить файл" onclick="send()">
+
 </form>
 </body>
 </html>
