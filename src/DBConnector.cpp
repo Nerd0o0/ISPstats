@@ -108,22 +108,6 @@ vector<unities::JobsForPerson> DBConnector::getJobsForPerson(int person_id) {
     return vector;
 }
 
-vector<unities::SprintBase> DBConnector::getSprints() {
-    std::string query="SELECT DISTINCT Sprint.SprintID, Name FROM Sprint,Job \
-                    WHERE Sprint.SprintID=Job.SprintID \
-                    ORDER BY Sprint.SprintBegin DESC;";
-    mysql_query(connector, query.c_str());
-    vector<unities::SprintBase> vector;
-    if (res = mysql_store_result(connector)) {
-        //vector.resize(mysql_num_rows(res));
-        while (row = mysql_fetch_row(res)) {
-            vector.push_back(unities::SprintBase(row));
-        }
-        mysql_free_result(res);
-    }
-    return vector;
-}
-
 vector<unities::ProjectBase> DBConnector::getProjects() {
     std::string query="SELECT DISTINCT Project.ProjectID, Project.Name FROM Project,Sprint,Job WHERE \
                       Project.ProjectID=Sprint.ProjectID AND Sprint.SprintID=Job.SprintID \

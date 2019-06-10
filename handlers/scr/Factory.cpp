@@ -11,9 +11,6 @@ namespace handlers {
         if (uri == "/" || uri == "/getProjects") {
             Logger::GetLogger().information("/getProjects");
             return new getProjects();
-        } else if (uri == "/getSprints") {
-            Logger::GetLogger().information("/getSprints");
-            return new getSprints();
         } else if (uri == "/getPersons") {
             //Logger::GetLogger().information("/getPersons");
             return new getPersons();

@@ -1,11 +1,10 @@
 #pragma once
 #include <string>
-#include <boost/date_time/gregorian/gregorian.hpp>
 #include <nlohmann/json.hpp>
 
 namespace unities {
     using namespace std;
-    class SprintBase {
+    class SprintBase : Base{
     public:
         int sprintID;
         std::string name;
