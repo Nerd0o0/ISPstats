@@ -30,14 +30,26 @@ target_link_libraries(${PROJECT_NAME}  mariadb)
 
 
 enable_testing()
-add_executable(ISPtest	unittest/to_json.cpp
+add_executable(JSONtest unittest/marshalling_test.cpp
         unities/src/Base.cpp unities/include/Base.h
         unities/src/JobsForPerson.cpp unities/include/JobsForPerson.h
         unities/src/JobsForSprint.cpp unities/include/JobsForSprint.h
         unities/src/LeaderPerson.cpp unities/include/LeaderPerson.h
-        unities/src/SprintsAndProjects.cpp unities/include/SprintsAndProjects.h)
-target_link_libraries(ISPtest ${CONAN_LIBS})
-add_test(NAME ISPtest COMMAND ISPtest)
+        unities/src/SprintsAndProjects.cpp unities/include/SprintsAndProjects.h unittest/database_test.cpp)
+target_link_libraries(JSONtest ${CONAN_LIBS})
+add_test(NAME JSONtest COMMAND JSONtest)
+
+add_executable(DBtest unittest/database_test.cpp
+        include/DBConnector.h src/DBConnector.cpp
+        unities/src/Base.cpp unities/include/Base.h
+        unities/src/JobsForPerson.cpp unities/include/JobsForPerson.h
+        unities/src/JobsForSprint.cpp unities/include/JobsForSprint.h
+        unities/src/LeaderPerson.cpp unities/include/LeaderPerson.h
+        unities/src/SprintsAndProjects.cpp unities/include/SprintsAndProjects.h unittest/database_test.cpp)
+target_link_libraries(DBtest ${CONAN_LIBS})
+target_link_libraries(DBtest  mariadbclient)
+target_link_libraries(DBtest  mariadb)
+add_test(NAME DBtest COMMAND DBtest)
 
 
 

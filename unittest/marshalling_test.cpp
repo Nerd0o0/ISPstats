@@ -1,7 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 #include <string>
-#include <iostream>
 #include "../unities/include/Base.h"
 #include "../unities/include/JobsForPerson.h"
 #include "../unities/include/JobsForSprint.h"
