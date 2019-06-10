@@ -108,60 +108,60 @@ vector<unities::JobsForPerson> DBConnector::getJobsForPerson(int person_id) {
     return vector;
 }
 
-vector<unities::ProjectBase> DBConnector::getProjects() {
+vector<unities::Base> DBConnector::getProjects() {
     std::string query="SELECT DISTINCT Project.ProjectID, Project.Name FROM Project,Sprint,Job WHERE \
                       Project.ProjectID=Sprint.ProjectID AND Sprint.SprintID=Job.SprintID \
                       ORDER BY Sprint.SprintBegin DESC;";
     mysql_query(connector, query.c_str());
-    vector<unities::ProjectBase> vector;
+    vector<unities::Base> vector;
     if (res = mysql_store_result(connector)) {
         //vector.resize(mysql_num_rows(res));
         while (row = mysql_fetch_row(res)) {
-            vector.push_back(unities::ProjectBase(row));
+            vector.push_back(unities::Base(row));
         }
         mysql_free_result(res);
     }
     return vector;
 }
-vector<unities::ProjectBase> DBConnector::getProjectForSprint(int sprint_id) {
+vector<unities::Base> DBConnector::getProjectForSprint(int sprint_id) {
     std::string query="SELECT DISTINCT Project.ProjectID, Project.Name FROM Project,Sprint WHERE \
                       Project.ProjectID=Sprint.ProjectID AND Sprint.SprintID="+
                       std::to_string(sprint_id)+";";
     mysql_query(connector, query.c_str());
-    vector<unities::ProjectBase> vector;
+    vector<unities::Base> vector;
     if (res = mysql_store_result(connector)) {
         //vector.resize(mysql_num_rows(res));
         while (row = mysql_fetch_row(res)) {
-            vector.push_back(unities::ProjectBase(row));
+            vector.push_back(unities::Base(row));
         }
         mysql_free_result(res);
     }
     return vector;
 }
-vector<unities::PersonBase> DBConnector::getPersons() {
+vector<unities::Base> DBConnector::getPersons() {
     std::string query="SELECT PersonID, Name FROM Person ORDER BY Name;";
     mysql_query(connector, query.c_str());
-    vector<unities::PersonBase> vector;
+    vector<unities::Base> vector;
     if (res = mysql_store_result(connector)) {
         //vector.resize(mysql_num_rows(res));
         while (row = mysql_fetch_row(res)) {
-            vector.push_back(unities::PersonBase(row));
+            vector.push_back(unities::Base(row));
         }
         mysql_free_result(res);
     }
     return vector;
 }
 
-vector<unities::SprintBase> DBConnector::getSprintsForProject(int id) {
+vector<unities::Base> DBConnector::getSprintsForProject(int id) {
     std::string query="SELECT DISTINCT  Sprint.SprintID, Name FROM Sprint,Job WHERE \
                       Sprint.SprintID=Job.SprintID AND Sprint.ProjectID=" + std::to_string(id) +
                       " ORDER BY Sprint.SprintBegin DESC;";
     mysql_query(connector, query.c_str());
-    vector<unities::SprintBase> vector;
+    vector<unities::Base> vector;
     if (res = mysql_store_result(connector)) {
         //vector.resize(mysql_num_rows(res));
         while (row = mysql_fetch_row(res)) {
-            vector.push_back(unities::SprintBase(row));
+            vector.push_back(unities::Base(row));
         }
         mysql_free_result(res);
     }

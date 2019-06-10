@@ -14,11 +14,10 @@ conan_basic_setup()
 
 add_executable(${PROJECT_NAME} main.cpp src/Server.cpp include/Server.h src/DBConnector.cpp include/DBConnector.h
         handlers/scr/Factory.cpp handlers/include/Factory.h handlers/scr/Error.cpp handlers/include/Error.h
-        unities/src/PersonBase.cpp unities/include/PersonBase.h unities/src/ProjectBase.cpp
-        unities/include/ProjectBase.h unities/src/SprintsAndProjects.cpp unities/include/SprintsAndProjects.h
-        unities/src/JobsForPerson.cpp unities/include/JobsForPerson.h unities/src/SprintBase.cpp
-        unities/include/SprintBase.h unities/src/JobsForSprint.cpp unities/include/JobsForSprint.h
-        handlers/scr/handlers.cpp handlers/include/handlers.h include/Logger.h src/Logger.cpp unities/src/LeaderPerson.cpp unities/include/LeaderPerson.h unities/src/LeaderSprint.cpp unities/include/LeaderSprint.h unities/include/Base.cpp unities/include/Base.h)
+        unities/src/SprintsAndProjects.cpp unities/include/SprintsAndProjects.h
+        unities/src/JobsForPerson.cpp unities/include/JobsForPerson.h
+        unities/src/JobsForSprint.cpp unities/include/JobsForSprint.h
+        handlers/scr/handlers.cpp handlers/include/handlers.h include/Logger.h src/Logger.cpp unities/src/LeaderPerson.cpp unities/include/LeaderPerson.h unities/src/Base.cpp unities/include/Base.h)
 
 
 target_link_libraries(${PROJECT_NAME} ${CONAN_LIBS})

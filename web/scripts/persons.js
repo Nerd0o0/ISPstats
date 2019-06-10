@@ -69,7 +69,7 @@ function getPersons() {
         $('#selectPerson option').remove();
         var sprints = JSON.parse(this.response);
         sprints.forEach(function (item, i, arr) {
-            $('#selectPerson').append('<option id=\'person_' + item.personID + '\' num=' + i + '>' + item.name + '</option>');
+            $('#selectPerson').append('<option id=\'person_' + item.id + '\' num=' + i + '>' + item.name + '</option>');
         });
     };
     httpRequest.open('GET', 'http://localhost:8080/getPersons', false);

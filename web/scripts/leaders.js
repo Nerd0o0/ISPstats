@@ -9,7 +9,7 @@ function getLeadersList() {
     httpRequest.onload = function () {
         let data = JSON.parse(this.response);
         data.fasterPerson.forEach(function (item, i, arr) {
-            $('#fasterPerson').append("<tr><td class='number'>"+(i+1)+"</td><td>" + item.name + "<br/>" + item.personID + "<br/>" + item.value + "</td></tr>");
+            $('#fasterPerson').append("<tr><td class='number'>"+(i+1)+"</td><td>" + item.name + "<br/>" + item.id + "<br/>" + item.value + "</td></tr>");
         });
 
     };

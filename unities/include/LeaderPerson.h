@@ -1,10 +1,10 @@
 #pragma once
-#include "PersonBase.h"
+#include "Base.h"
 
 namespace unities {
     using namespace std;
 
-    class LeaderPerson : public PersonBase {
+    class LeaderPerson : public Base {
     public:
         double personValue;
 
@@ -15,7 +15,7 @@ namespace unities {
 
     inline void to_json(nlohmann::json &j, const LeaderPerson &p) {
         j = nlohmann::json{
-                {"personID", p.personID},
+                {"personID", p.id},
                 {"name",     p.name},
                 {"value",    p.personValue}
 

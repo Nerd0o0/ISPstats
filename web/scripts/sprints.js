@@ -10,10 +10,8 @@ function getSprints(){
     httpRequest.onload=function() {
         $('#selectSprint option').remove();
         var sprints=JSON.parse(this.response);
-        var a=0;
         sprints.forEach(function(item,i,arr){
-            $('#selectSprint').append('<option id=sprint_'+item.sprintID+' num='+a+'>'+item.name+'</option>');
-            a++;
+            $('#selectSprint').append('<option id=sprint_'+item.id+' num='+i+'>'+item.name+'</option>');
         });
     };
     var select=document.getElementById('selectProject');
@@ -33,10 +31,8 @@ function getProjects(){
     httpRequest.onload=function() {
         $('#selectProject option').remove();
         var sprints=JSON.parse(this.response);
-        var a=0;
         sprints.forEach(function(item,i,arr){
-            $('#selectProject').append('<option id=\'project_'+item.projectID+'\' num='+a+'>'+item.name+'</option>');
-            a++;
+            $('#selectProject').append('<option id=\'project_'+item.id+'\' num='+i+'>'+item.name+'</option>');
         });
     }
     httpRequest.open('GET', 'http://localhost:8080/getProjects', false);
@@ -121,7 +117,7 @@ function openFromLink() {
             var data = JSON.parse(this.response);
             var select = document.getElementById('selectProject');
             //найти элемент с нужным индексом (они были отсортированы, id в базе и индекс в списке не совпадают)
-            var index = document.getElementById('project_' + data[0].projectID).getAttribute("num");
+            var index = document.getElementById('project_' + data[0].id).getAttribute("num");
             select.selectedIndex = Number(index);
             getSprints(false);
 

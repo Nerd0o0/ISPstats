@@ -2,9 +2,7 @@
 #include "../unities/include/SprintsAndProjects.h"
 #include "../unities/include/JobsForSprint.h"
 #include "../unities/include/JobsForPerson.h"
-#include "../unities/include/SprintBase.h"
-#include "../unities/include/ProjectBase.h"
-#include "../unities/include/PersonBase.h"
+#include "../unities/include/Base.h"
 #include "../unities/include/LeaderPerson.h"
 #include "mysql.h"
 
@@ -18,11 +16,11 @@ public:
     vector<unities::SprintsAndProjects> getSprintsAndProjects();
     vector<unities::JobsForSprint> getJobsForSprint(int);
     vector<unities::JobsForPerson> getJobsForPerson(int);
-    vector<unities::SprintBase> getSprints();
-    vector<unities::ProjectBase> getProjects();
-    vector<unities::ProjectBase> getProjectForSprint(int);
-    vector<unities::PersonBase> getPersons();
-    vector<unities::SprintBase> getSprintsForProject(int);
+    vector<unities::Base> getSprints();
+    vector<unities::Base> getProjects();
+    vector<unities::Base> getProjectForSprint(int);
+    vector<unities::Base> getPersons();
+    vector<unities::Base> getSprintsForProject(int);
     vector<unities::LeaderPerson> getMinRatioPersons();
     int initDatabase();
     int loadData(std::istream&);
