@@ -93,11 +93,12 @@ void getLeadersList::HandleRestRequest(Poco::Net::HTTPServerRequest& request, Po
     response.send() << result;
 }
 void updateDatabase::HandleRestRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) {
-    std::cout<<"UpdateDatabaseHandler"<<std::endl;
     std::string str;
+    response.add("Access-Control-Allow-Origin","*");
     DBConnector connector("boss","q1w2e3r4");
 //    connector.initDatabase();
-    connector.loadData(request.stream());
+//    connector.loadData(request.stream());
     response.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
-    response.send();
+    response.send()<<"";
+    std::cout<<"success"<<std::endl;
 }
