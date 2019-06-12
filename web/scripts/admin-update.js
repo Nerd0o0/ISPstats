@@ -2,7 +2,7 @@ function send() {
     let obj=document.getElementById('file');
     let str="";
     let fileReader=new FileReader();
-    fileReader.readAsBinaryString(obj.files[0]);
+    fileReader.readAsText(obj.files[0]);
     fileReader.onload=(function(file,data){
         var httpRequest;
         if(window.XMLHttpRequest){ //Mozilla, Safari
@@ -11,7 +11,7 @@ function send() {
             httpRequest=new ActiveXObject('Microsoft.XMLHTTP');
         }
         httpRequest.overrideMimeType('text/ajax');
-        httpRequest.onload=function() {};
+        httpRequest.onload=function() {alert("Успешно");};
         httpRequest.open('POST', 'http://localhost:8080/update-database', false);
         httpRequest.send(fileReader.result);
     });

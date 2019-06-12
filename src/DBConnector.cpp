@@ -1,19 +1,36 @@
 #include "../include/DBConnector.h"
 #include <boost/algorithm/string.hpp>
 #include <istream>
+#include <string>
+#include <locale>
+#include <clocale>
+#include <boost/format.hpp>
 
 using namespace std;
 string trim(const string& str)
 {
+    if(str.length()==0) return str;
     size_t first = str.find_first_not_of(' ');
-    if (string::npos == first)
-    {
-        return str;
-    }
     size_t last = str.find_last_not_of(' ');
     return str.substr(first, (last - first + 1));
 }
-
+vector<std::string> split(string str, const string sep){
+    std::vector<std::string> arr;
+    boost::algorithm::split(arr, str, boost::is_any_of(sep));
+    return arr;
+}
+std::string getPersonByName(MYSQL *connector, std::string name) {
+    mysql_query(connector, std::string("SELECT PersonID FROM Person WHERE Name=" + name).c_str());
+    string personID;
+    MYSQL_RES *res;
+    if (res = mysql_store_result(connector)) {
+        while (MYSQL_ROW row = mysql_fetch_row(res)) {
+            personID = row[0];
+        }
+        mysql_free_result(res);
+    }
+    return personID;
+}
 DBConnector::DBConnector():DBConnector("stats","q1w2e3r4") {}
 DBConnector::DBConnector(string login, string password){
     mysql_debug("d:t:O");
@@ -266,156 +283,134 @@ int DBConnector::initDatabase() {
     return mysql_query(connector, query.c_str());
 }
 int DBConnector::loadData(std::istream& stream) {
-    /*string l;
-    int projects = 1;
-    int persons = 1;
-    int sprints = 1;
-    unities::ProjectBase project;
-    unities::SprintBase sprint;
+    string l;
+    string query;
+    int projects = 0;
+    int persons = 0;
+    int sprints = 0;
+    unities::Base project;
+    unities::Base sprint;
     boost::gregorian::date sprintBegin;
     boost::gregorian::date sprintEnd;
     while (!stream.eof()) {
-        stream >> l;
-        std::vector<std::string> line;
-        boost::algorithm::split(line, l, boost::is_any_of(":"));
-        std::cout << line.size() << std::endl;
-        if (line[0] == "Project") {
-            project(projects, boost::trim(line[1]));
-            mysql_query(connector, std::string("INSERT INTO Project(Name) VALUES ('" + std::to_string(project.name) + "');");
+        std::getline(stream,l,'\n');
+        std::vector<std::string> line=split(l,":");
+        if (line[0].compare("Project")==0) {
+            project = unities::Base(projects+1, trim(line[1]));
+            query=std::string("INSERT INTO Project(Name) VALUES (")+string(trim(line[1]))+string(");");
+            mysql_query(connector, std::string("INSERT INTO Project(Name) VALUES ('" + trim(line[1]) + "');").c_str());
+            projects++;
         } else if (line[0] == "Sprint") {
-            std::vector<std::string> args;
-            boost::algorithm::split(args, line[1], boost::is_any_of("-"));
-
-            sprintBegin = boost::gregorian::from_string(begin_s)
-                    LocalDate.of(Integer.parseInt(args[0].trim()), Integer.parseInt(args[1].trim()),
-                                 Integer.parseInt(args[2].trim()));
-            end = LocalDate.of(Integer.parseInt(args[3].trim()), Integer.parseInt(args[4].trim()),
-                               Integer.parseInt(args[5].trim()));
-            sprintName = arr[2].trim();
+            std::vector<std::string> args=split(line[1],"-");
+            sprintBegin = boost::gregorian::from_string(trim(args[0]) + "-" + trim(args[1]) + "-" + trim(args[2]));
+            sprintEnd = boost::gregorian::from_string(trim(args[3]) + "-" + trim(args[4]) + "-" + trim(args[5]));
+            sprint=unities::Base(sprints+1, trim(args[2]));
             break;
-        } else if (result[0] == "Sprint details") {
-            args = arr[1].split(" ");
-            currentSprint = new Sprint(sprints.size() + 1, currentProject.getProjectID(), sprintName,
-                                       Date.valueOf(begin), Date.valueOf(end),
-                                       Integer.parseInt(args[1].split("=")[1].trim()),
-                                       (int) Double.parseDouble(args[2].split("=")[1].trim()),
-                                       Integer.parseInt(args[3].split("=")[1].trim()),
-                                       (int) Double.parseDouble(args[4].split("=")[1].trim()),
-                                       (int) Double.parseDouble(args[5].split("=")[1].trim()),
-                                       Integer.parseInt(args[6].split("=")[1].trim()),
-                                       (int) Double.parseDouble(args[7].split("=")[1].trim()),
-                                       (int) Double.parseDouble(args[8].split("=")[1].trim()),
-                                       Integer.parseInt(args[9].split("=")[1].trim()),
-                                       Integer.parseInt(args[10].split("=")[1].trim()),
-                                       Integer.parseInt(args[11].split("=")[1].trim()));
-            statement.executeQuery(
-                    "INSERT INTO Sprint(ProjectID, Name, SprintBegin, SprintEnd, BugCount, EstimationBugTime," +
-                    "CompleteBugCount, CompleteBugEstimation, CompleteBugFact, IncompleteBugCount, IncompleteBugEstimation," +
-                    "IncompleteBugFact,CodeBranches,CodeDiscussion, CodeReturns) VALUES ('" +
-                    currentSprint.getProjectID() + "', '" + currentSprint.getName() + "', '" +
-                    currentSprint.getBegin() + "', '" +
-                    currentSprint.getEnd() + "', '" + currentSprint.getBugCount() + "', '" +
-                    currentSprint.getEstimationBugTime() + "', '" +
-                    currentSprint.getCompleteBugCount() + "', '" + currentSprint.getCompleteBugEstimation() +
-                    "', '" +
-                    currentSprint.getCompleteBugFact() + "', '" + currentSprint.getIncompleteBugCount() + "', '" +
-                    currentSprint.getIncompleteBugEstimation() + "', '" + currentSprint.getIncompleteBugFact() +
-                    "', '" +
-                    currentSprint.getCodeBranches() + "', '" + currentSprint.getCodeDiscussion() + "', '" +
-                    currentSprint.getCodeReturns() + "');");
-            //замена ID
-            resultSet = statement.executeQuery(
-                    "SELECT * FROM Sprint WHERE Name='" + currentSprint.getName() + "';");
-            if (resultSet.next()) {
-                currentSprint.setSprintID(resultSet.getInt("SprintID"));
-                sprints.add(currentSprint);
-            }
-            break;
-        } else if (result[0] == "Work") {
-            args = s.split(" ");
-            String[]
-            date = args[2].split("-");
-            String[]
-            time = args[3].split(",");
-            String[]
-            timeStart = time[1].split(":");
-            String[]
-            timeEnd = time[2].split(":");
-            LocalDate jobDate = LocalDate.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]),
-                                             Integer.parseInt(date[2]));
-
-            LocalTime jobBegin = LocalTime.of(Integer.parseInt(timeStart[0]), Integer.parseInt(timeStart[1]),
-                                              Integer.parseInt((timeStart[2])));
-            LocalTime jobEnd = LocalTime.of(Integer.parseInt(timeEnd[0]), Integer.parseInt(timeEnd[1]),
-                                            Integer.parseInt(timeEnd[2]));
-            JobTime jobTime = new JobTime(getPersonFromName(args[1]).getPersonID(),
-                                          Integer.parseInt(time[0].trim()),
-                                          (jobBegin.getHour() * 3600) + (jobBegin.getMinute() * 60) +
-                                          jobBegin.getSecond(),
-                                          (jobEnd.getHour() * 3600) + (jobEnd.getMinute() * 60) +
-                                          jobEnd.getSecond(),
-                                          jobDate);
-            jobTimes.add(jobTime);
-            statement.executeQuery("INSERT INTO JobTime(PersonID, JobTime, JobBegin, JobEnd, JobDate) VALUES ('" +
-                                   jobTime.personID + "', '" + jobTime.jobTime + "', '" + jobTime.jobBegin +
-                                   "', '" +
-                                   jobTime.jobEnd + "', '" + jobTime.jobDate + "');");
-            break;
-        } else if (result[0] == "" || result[0] == "Process finished with exit code 0") {}
+        } else if (line[0] == "Sprint details") {
+            std::vector<std::string> args=split(line[1]," ");
+            mysql_query(connector, std::string("INSERT INTO Sprint \
+                                                   (ProjectID, Name, SprintBegin, SprintEnd, BugCount, EstimationBugTime,\
+                                                   CompleteBugCount, CompleteBugEstimation, CompleteBugFact, IncompleteBugCount,\
+                                                   IncompleteBugEstimation,IncompleteBugFact,CodeBranches,CodeDiscussion,\
+                                                   CodeReturns) VALUES ('" + std::to_string(projects) + ","+ sprint.name +
+                                               (std::to_string(sprintBegin.year())+"-"+std::to_string(sprintBegin.month())+"-"+std::to_string(sprintBegin.day()))+
+                                               ","+(std::to_string(sprintEnd.year())+"-"+std::to_string(sprintEnd.month())+"-"+std::to_string(sprintEnd.day()))+
+                                               ","+trim(split(args[1],"=")[1])+","+ trim(split(args[2],"=")[1])+","+
+                                               trim(split(args[3],"=")[1])+","+trim(split(args[4],"=")[1])+","+
+                                               trim(split(args[5],"=")[1])+","+trim(split(args[6],"=")[1])+","+
+                                               trim(split(args[7],"=")[1])+","+trim(split(args[8],"=")[1])+","+
+                                               trim(split(args[9],"=")[1])+","+trim(split(args[10],"=")[1])+","+
+                                               trim(split(args[11],"=")[1])+");").c_str());
+            std::cout<<std::string("INSERT INTO Sprint \
+                                                   (ProjectID, Name, SprintBegin, SprintEnd, BugCount, EstimationBugTime,\
+                                                   CompleteBugCount, CompleteBugEstimation, CompleteBugFact, IncompleteBugCount,\
+                                                   IncompleteBugEstimation,IncompleteBugFact,CodeBranches,CodeDiscussion,\
+                                                   CodeReturns) VALUES ('" + std::to_string(projects) + ","+ sprint.name +
+                                                          (std::to_string(sprintBegin.year())+"-"+std::to_string(sprintBegin.month())+"-"+std::to_string(sprintBegin.day()))+
+                                                          ","+(std::to_string(sprintEnd.year())+"-"+std::to_string(sprintEnd.month())+"-"+std::to_string(sprintEnd.day()))+
+                                                          ","+trim(split(args[1],"=")[1])+","+ trim(split(args[2],"=")[1])+","+
+                                                          trim(split(args[3],"=")[1])+","+trim(split(args[4],"=")[1])+","+
+                                                          trim(split(args[5],"=")[1])+","+trim(split(args[6],"=")[1])+","+
+                                                          trim(split(args[7],"=")[1])+","+trim(split(args[8],"=")[1])+","+
+                                                          trim(split(args[9],"=")[1])+","+trim(split(args[10],"=")[1])+","+
+                                                          trim(split(args[11],"=")[1])+");").c_str()<<std::endl;
+            sprints++;
+        } else if (line[0] == "Work") {
+            std::vector<std::string> args=split(l.substr(6)," ");
+            string personID=getPersonByName(connector, args[0]);
+            vector<string> start=split(split(args[2],",")[1],":");
+            vector<string> end=split(split(args[2],",")[2],":");
+            int jobStart=stoi(start[0])*360+stoi(start[1])*60+stoi(start[2]);
+            int jobEnd=stoi(end[0])*360+stoi(end[1])*60+stoi(end[2]);
+            mysql_query(connector, std::string("INSERT INTO JobTime(PersonID, JobTime, JobBegin, JobEnd, JobDate) VALUES (" +
+                                   personID + "," + split(args[2],",")[0] + "," + std::to_string(jobStart) +
+                                   ", " + std::to_string(jobEnd) + "," + args[1] + "');").c_str());
+            std::cout<<std::string("INSERT INTO JobTime(PersonID, JobTime, JobBegin, JobEnd, JobDate) VALUES (" +
+                                   personID + "," + split(args[2],",")[0] + "," + std::to_string(jobStart) +
+                                   ", " + std::to_string(jobEnd) + "," + args[1] + "');").c_str()<<std::endl;
+        } else if (line[0] == "" || line[0] == "Process finished with exit code 0") {}
         else {
-            args = s.split(" ");
-            Person person = getPersonFromName(args[0]);
-            if (person == null) {
-                person = new Person(currentProject.getProjectID(), persons.size() + 1, args[0]);
-                statement.executeQuery(
-                        "INSERT INTO Person(ProjectID, Name) VALUES ('" + person.getProjectID() + "', '" +
-                        person.getPersonName() + "');");
-                //замена ID
-                resultSet = statement.executeQuery(
-                        "SELECT * FROM Person WHERE Name='" + person.getPersonName() + "';");
-                if (resultSet.next()) {
-                    person.setPersonID(resultSet.getInt("PersonID"));
-                }
-                persons.add(person);
+            std::vector<std::string> args=split(l," ");
+            std::string personID = getPersonByName(connector, args[0]);
+            if (personID == "") {
+                mysql_query(connector, std::string("INSERT INTO Person(ProjectID, Name) VALUES (" + std::to_string(project.id) + "," +
+                        args[0] + ");").c_str());
+                std::cout<<std::string("INSERT INTO Person(ProjectID, Name) VALUES (" + std::to_string(project.id) + "," +
+                       args[0] + ");").c_str()<<std::endl;
+                persons++;
+                personID = getPersonByName(connector, args[0]);
             }
-            Job job = new Job(person.getPersonID(),
-                              currentSprint,//Sprint sprint;
-                              Integer.parseInt(args[2].split("=")[1].trim()),//int completeCount;
-                              (int) Double.parseDouble(args[3].split("=")[1].trim()),//int completeEstTime;
-                              (int) Double.parseDouble(args[4].split("=")[1].trim()),//int completeFactTime;
-                              Integer.parseInt(args[5].split("=")[1].trim()),//int incompleteCount;
-                              (int) Double.parseDouble(args[6].split("=")[1].trim()),//int incompleteEstTime;
-                              (int) Double.parseDouble(args[7].split("=")[1].trim()),//int incompleteFactTime;
-                              (int) Double.parseDouble(args[8].split("=")[1].trim()),//int completeHelpTime;
-                              Integer.parseInt(args[9].split("=")[1].trim()),//int completeHelpCount;
-                              (int) Double.parseDouble(args[10].split("=")[1].trim()),//int incompleteHelpTime;
-                              Integer.parseInt(args[11].split("=")[1].trim()),//int incompleteHelpCount;
-                              Integer.parseInt(args[12].split("=")[1].trim()),//int codeReturns;
-                              Integer.parseInt(args[13].split("=")[1].trim()),//int codeDiscussion;
-                              Integer.parseInt(args[14].split("=")[1].trim()),//int codeBranches;
-                              Integer.parseInt(args[15].split("=")[1].trim()),//int codeMerged;
-                              Integer.parseInt(args[16].split("=")[1].trim()),//int codeSeen;
-                              Integer.parseInt(args[17].split("=")[1].trim()));//int codeCommented;
-            statement.executeQuery("INSERT INTO Job(PersonID, SprintID," +
-                                   "CompleteCount, CompleteEstTime,CompleteFactTime," +
-                                   "IncompleteCount, IncompleteEstTime, IncompleteFactTime," +
-                                   "CompleteHelpTime, CompleteHelpCount," +
-                                   "IncompleteHelpTime, IncompleteHelpCount," +
-                                   "CodeReturns, CodeDiscussion, CodeBranches, CodeMerged," +
-                                   "CodeSeen, CodeCommented) VALUES ('" +
-                                   job.getPersonID() + "', '" + job.getSprint().getSprintID() + "', '" +
-                                   job.getCompleteCount() + "', '" + job.getCompleteEstTime() + "', '" +
-                                   job.getCompleteFactTime() + "', '" +
-                                   job.getIncompleteCount() + "', '" + job.getIncompleteEstTime() + "', '" +
-                                   job.getIncompleteFactTime() + "', '" +
-                                   job.getCompleteHelpTime() + "', '" + job.getCompleteHelpCount() + "', '" +
-                                   job.getIncompleteHelpTime() + "', '" + job.getIncompleteHelpCount() + "', '" +
-                                   job.getCodeReturns() + "', '" + job.getCodeDiscussion() + "', '" +
-                                   job.getCodeBranches() + "', '" + job.getCodeMerged() + "', '" +
-                                   job.getCodeSeen() + "', '" + job.getCodeCommented() + "')");
-            jobs.add(job);
-            break;
+            mysql_query(connector, std::string("INSERT INTO Job(PersonID, SprintID,\
+                                   CompleteCount, CompleteEstTime,CompleteFactTime,\
+                                   IncompleteCount, IncompleteEstTime, IncompleteFactTime,\
+                                   CompleteHelpTime, CompleteHelpCount,\
+                                   IncompleteHelpTime, IncompleteHelpCount,\
+                                   CodeReturns, CodeDiscussion, CodeBranches, CodeMerged,\
+                                   CodeSeen, CodeCommented) VALUES (" +
+                                   personID + "," + std::to_string(sprint.id) + "," +
+                                   trim(split(args[2],"=")[1]) + "," +
+                                   trim(split(args[3],"=")[1]) + "," +
+                                   trim(split(args[4],"=")[1]) + "," +
+                                   trim(split(args[5],"=")[1]) + "," +
+                                   trim(split(args[6],"=")[1]) + "," +
+                                   trim(split(args[7],"=")[1]) + "," +
+                                   trim(split(args[8],"=")[1]) + "," +
+                                   trim(split(args[9],"=")[1]) + "," +
+                                   trim(split(args[10],"=")[1]) + "," +
+                                   trim(split(args[11],"=")[1]) + "," +
+                                   trim(split(args[12],"=")[1]) + "," +
+                                   trim(split(args[13],"=")[1]) + "," +
+                                   trim(split(args[14],"=")[1]) + "," +
+                                   trim(split(args[15],"=")[1]) + "," +
+                                   trim(split(args[16],"=")[1]) + "," +
+                                   trim(split(args[17],"=")[1]) + ");").c_str());
+        std::cout<<std::string("INSERT INTO Job(PersonID, SprintID,\
+                                   CompleteCount, CompleteEstTime,CompleteFactTime,\
+                                   IncompleteCount, IncompleteEstTime, IncompleteFactTime,\
+                                   CompleteHelpTime, CompleteHelpCount,\
+                                   IncompleteHelpTime, IncompleteHelpCount,\
+                                   CodeReturns, CodeDiscussion, CodeBranches, CodeMerged,\
+                                   CodeSeen, CodeCommented) VALUES (" +
+                               personID + "," + std::to_string(sprint.id) + "," +
+                               trim(split(args[2],"=")[1]) + "," +
+                               trim(split(args[3],"=")[1]) + "," +
+                               trim(split(args[4],"=")[1]) + "," +
+                               trim(split(args[5],"=")[1]) + "," +
+                               trim(split(args[6],"=")[1]) + "," +
+                               trim(split(args[7],"=")[1]) + "," +
+                               trim(split(args[8],"=")[1]) + "," +
+                               trim(split(args[9],"=")[1]) + "," +
+                               trim(split(args[10],"=")[1]) + "," +
+                               trim(split(args[11],"=")[1]) + "," +
+                               trim(split(args[12],"=")[1]) + "," +
+                               trim(split(args[13],"=")[1]) + "," +
+                               trim(split(args[14],"=")[1]) + "," +
+                               trim(split(args[15],"=")[1]) + "," +
+                               trim(split(args[16],"=")[1]) + "," +
+                               trim(split(args[17],"=")[1]) + ");").c_str()<<std::endl;
         }
-    }*/
+    }
     return 0;
 }
+
+

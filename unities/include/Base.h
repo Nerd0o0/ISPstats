@@ -9,6 +9,7 @@ namespace unities {
         std::string name;
         Base(int person_id, std::string n);
         Base(char **rows);
+        Base();
     };
     inline void to_json(nlohmann::json &j, const Base &p) {
         j = nlohmann::json{
